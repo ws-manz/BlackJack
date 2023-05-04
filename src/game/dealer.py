@@ -6,11 +6,20 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from game.level import Level
 from game.player import Player
 from game.user import User
+from card.deck import Deck
 
 class Dealer:
-    def __init__(self):
+    def __init__(self, deck = []):
         self.__player = Player(User("Dealer", Level.ADVANCED, 100000))
-
+        self.__deck = deck
+        
     def get_player(self):
         return self.__player
+    
+    def reset_deck(self):
+        self.__deck.reset_deck()
+    
+    def deal_card(self, player : Player):
+        # Distribui uma carta para o jogador
+        player.add_card(self.__deck.get_next_card())
 

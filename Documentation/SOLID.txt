@@ -1,7 +1,14 @@
 A classe Game apresenta algumas oportunidades de melhoria em relação ao princípio SOLID. Vamos analisar cada um deles.
 
 Single Responsibility Principle (Princípio da Responsabilidade Única)
-A classe Game é responsável por várias responsabilidades, como criar o baralho, distribuir cartas, gerenciar jogadores e controlar o fluxo do jogo. Portanto, ela viola o princípio da responsabilidade única. Para resolver esse problema, podemos extrair algumas dessas responsabilidades para outras classes. Por exemplo, podemos criar uma classe Deck para gerenciar o baralho, uma classe Dealer para gerenciar o dealer e uma classe Round para controlar o fluxo de cada rodada. Dessa forma, cada classe terá uma responsabilidade única e bem definida.
+A classe Game é responsável por várias responsabilidades, como criar o baralho,
+distribuir cartas, gerenciar jogadores e controlar o fluxo do jogo. Portanto, 
+ela viola o princípio da responsabilidade única. Para resolver esse problema, 
+podemos extrair algumas dessas responsabilidades para outras classes. Por exemplo, 
+podemos criar uma classe Deck para gerenciar o baralho, 
+uma classe Dealer para gerenciar o dealer e 
+uma classe Round para controlar o fluxo de cada rodada. 
+Dessa forma, cada classe terá uma responsabilidade única e bem definida.
 
 Open-Closed Principle (Princípio Aberto-Fechado)
 A classe Game não é facilmente extensível, pois seu código é rígido e limitado às suas funcionalidades existentes. Se quisermos adicionar novos recursos, como diferentes tipos de jogos ou diferentes regras, teremos que modificar o código da classe Game. Para torná-la mais extensível, podemos criar uma classe base abstrata chamada AbstractGame que define os métodos que todos os jogos devem ter. Em seguida, podemos criar subclasses concretas para cada tipo de jogo, cada uma com suas próprias regras e implementações específicas.
