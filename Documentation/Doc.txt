@@ -1,0 +1,12 @@
+A classe Player representa um jogador no jogo de BlackJack. Essa classe é abstrata, pois possui um método abstrato play(), que deve ser implementado pelas classes que herdam dela.
+
+Métodos:
+
+__init__(self, user): construtor da classe que recebe um objeto User como parâmetro e inicializa os atributos __user e __cards, este último como uma lista vazia.
+add_card(self, card): adiciona uma carta à mão do jogador.
+get_user(self): retorna o objeto User do jogador.
+reset_cards(self): limpa a lista de cartas da mão do jogador.
+get_hand(self): retorna a lista de cartas da mão do jogador.
+get_hand_value(self): retorna o valor atual da mão do jogador.
+play(self): método abstrato que deve ser implementado pelas classes que herdam de Player. Retorna uma string representando a jogada do jogador.
+A classe Player é uma classe abstrata e não deve ser instanciada diretamente. As classes que herdam dela devem implementar o método play() e podem sobrescrever outros métodos, se necessário.
