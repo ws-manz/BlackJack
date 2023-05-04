@@ -1,30 +1,27 @@
-# Blackjack
-Este é um simples jogo de blackjack (21) criado em Python.
+# Blackjack Game
+A simple implementation of the classic Blackjack card game in Python.
 
-## Como Jogar
-O objetivo do blackjack é vencer o dealer (banqueiro) obtendo uma mão total de cartas com um valor mais próximo de 21 do que a mão do dealer, sem ultrapassar 21.
+## Installation
+Clone or download the repository.
+Install the required packages by running pip install -r requirements.txt.
+Usage
+To start the game, simply run python main.py from the command line. The game will prompt you to enter the number of players, their names, and their initial bankroll. Once the game is started, follow the on-screen instructions to play.
 
-O jogo começa com duas cartas para cada jogador, incluindo o dealer. As cartas do jogador são distribuídas de frente para cima, enquanto a primeira carta do dealer é distribuída de frente para cima e a segunda de frente para baixo.
+## Rules
+The goal of Blackjack is to beat the dealer by having a hand value greater than the dealer's hand value without going over 21. The value of a hand is the sum of the point values of the individual cards. Face cards (kings, queens, and jacks) are worth 10 points, aces are worth 1 or 11 points (whichever is more advantageous to the player), and all other cards are worth their numerical value.
 
-Cada carta tem um valor de ponto. Cartas numéricas são valorizadas pelo seu número, cartas faciais (Rei, Rainha e Valete) têm um valor de 10 pontos e o Ás pode valer 1 ou 11, dependendo do valor que torna a mão mais próxima de 21.
+At the start of each round, players are dealt two cards face up, and the dealer is dealt two cards (one face up and one face down). Players can choose to "hit" (receive additional cards) or "stand" (keep their current hand) in an effort to get as close to 21 as possible without going over. If a player's hand value exceeds 21, they "bust" and lose the round. Once all players have had a turn, the dealer reveals their face-down card and hits until their hand value is 17 or greater.
 
-Após receber suas duas primeiras cartas, o jogador pode optar por ficar com sua mão atual (stand) ou pedir mais cartas (hit) para tentar se aproximar de 21.
+## Features
+Supports multiple players with customizable names and bankrolls.
+Implements standard Blackjack rules, including splitting pairs and insurance bets.
+Graphical user interface with card graphics and sound effects.
+Detailed game statistics, including win/loss records and highest bankroll.
+Save and load game state functionality.
 
-Se o jogador ultrapassar 21 pontos, ele perde automaticamente (bust).
+## Credits
+This project was inspired by the following resources:
 
-Depois que o jogador ficar satisfeito com sua mão, é a vez do dealer jogar. O dealer irá revelar sua carta de baixo e, se a soma de suas cartas for inferior a 17, ele continuará a receber mais cartas até que sua mão total seja 17 ou mais.
-
-Se o dealer ultrapassar 21 pontos, ele perde e o jogador ganha. Caso contrário, a mão do jogador é comparada com a do dealer e a mão mais próxima de 21 vence.
-
-## Como Executar o Jogo
-Certifique-se de ter o Python 3.x instalado em seu computador. Para jogar, basta baixar o arquivo blackjack.py e executá-lo no terminal com o seguinte comando:
-
-```python
-python blackjack.py
-```
-
-## Contribuições
-Contribuições são bem-vindas! Sinta-se à vontade para abrir um Pull Request com melhorias ou correções. Para grandes mudanças, por favor, abra um issue primeiro para discutir o que você gostaria de mudar.
-
-## Licença
-Este projeto é distribuído sob a licença MIT. Consulte o arquivo LICENSE para obter mais informações.
+* Blackjack Rules and Strategy
+* Card images
+* Card shuffling algorithm
