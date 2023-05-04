@@ -30,6 +30,14 @@ class User:
         if amount > self.__balance:
             raise ValueError("Insufficient funds")
         self.__balance -= amount
+    
+    def update_balance(self, result: int, bet:float) -> None:
+        if result == 0: # empate
+            return
+        elif result == 1: # usuário ganha
+            self.add_funds(bet)
+        else: # usuário perde
+            self.remove_funds(bet)
         
     def __str__(self):
         return f"User {self.__name} - Level: {self.__level.value} - Balance: {self.__balance}"
