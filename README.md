@@ -18,9 +18,10 @@ Implements standard Blackjack rules, including splitting pairs and insurance bet
 Graphical user interface with card graphics and sound effects.
 Detailed game statistics, including win/loss records and highest bankroll.
 Save and load game state functionality.
-Credits
+
+## Credits
 This project was inspired by the following resources:
 
-Blackjack Rules and Strategy
-Card images
-Card shuffling algorithm
+* Blackjack Rules and Strategy
+* Card images
+* Card shuffling algorithm
