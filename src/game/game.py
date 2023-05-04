@@ -1,11 +1,12 @@
-from card.card import Card
-from card.suit import Suit
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from game.player import Player
-from game.level import Level
 from game.dealer import Dealer  # importa a classe Dealer
 from card.deck import Deck 
 from game.round import Round # importa a classe Round
-
 
 from abc import ABC, abstractmethod
 
@@ -35,17 +36,17 @@ class Game:
         self.__players.append(player)
         
     def start_game(self) :
+        # Reinicia o jogo
+        self.reset_game()
+        
         # Verifica se há pelo menos um jogador no jogo
         if len(self.__players) == 0 :
             print("*Insufficient number of players*")
             return
         
-        # Informa que o jogo começou
         print("*Game started, Welcome!*")
         # Inicia a rodada
         self.play_round()
-        # Reinicia o jogo
-        self.reset_game()
         
     
     def play_round(self):

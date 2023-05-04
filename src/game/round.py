@@ -45,6 +45,7 @@ class Round:
                 else:
                     player.get_user().update_balance(Result.LOSS, self.__bet) # penaliza os perdedores com o valor da aposta
 
-        self.__game_view.display_round_result(winners)
+        self.__game_view.display_round_result(winners)    
+
         
                 

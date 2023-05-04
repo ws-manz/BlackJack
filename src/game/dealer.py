@@ -7,7 +7,6 @@ from game.level import Level
 from game.botPlayer import BotPlayer
 from game.player import Player
 from game.user import User
-from card.deck import Deck
 
 class Dealer:
     def __init__(self, deck = []):
@@ -19,9 +18,12 @@ class Dealer:
     
     def reset_deck(self):
         self.__deck.reset_deck()
-        self.__player.reset_cards();
+        self.__player.reset_cards()
     
     def deal_card(self, player : Player):
         # Distribui uma carta para o jogador
         player.add_card(self.__deck.get_next_card())
+        
+    def remaining_cards(self):
+        return self.__deck.get_cards()
 

@@ -26,4 +26,4 @@ class GameView:
                 print(f"{player.get_user().name} wins! {[card.name + ' ' + card.suit.symbol for card in player.get_hand()]} - Points: {player.get_hand_value()} - Bet: {player.get_user().balance}")
             else:
                 print(f"{player.get_user().name} loses. {[card.name + ' ' + card.suit.symbol for card in player.get_hand()]} - Points: {player.get_hand_value()} - Bet: {player.get_user().balance}")
-        print("\n")
+        print("\n")        
