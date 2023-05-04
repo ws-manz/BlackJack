@@ -40,9 +40,9 @@ class Game:
                 self.deal_card(player)
         # Exibe as cartas de cada jogador e seu valor total das cartas
         for player in self.__players:
-            print(f"### {player.get_user().get_name()} - Value {player.get_hand_value()} ###")
-            for card in player.get_cards():
-                print(f"Card {card.get_name()} {card.get_suit().get_symbol()}")
+            print(f"### {player.get_user().name} - Value {player.get_hand_value()} ###")
+            for card in player.get_hand():
+                print(f"Card {card.name} {card.suit.symbol}")
             print(f"######################################")
     
     def deal_card(self, player):
@@ -75,6 +75,6 @@ class Game:
         random.shuffle(cards)
 
         #for card in cards:
-        #    print(f"Card {card.get_name()} {card.get_suit().get_symbol()}")
+        #    print(f"Card {card.name} {card.suit.get_symbol()}")
 
         return (cards)

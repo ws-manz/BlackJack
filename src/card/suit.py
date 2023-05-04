@@ -1,18 +1,17 @@
 class Suit:
-    def __init__(self, name, symbol) -> None:
-        self.__name=name
-        self.__symbol=symbol
-    
-    def set_name(self, name):
+    def __init__(self, name: str, symbol: str) -> None:
         self.__name = name
-    
-    def get_name(self):
-        return self.__name
-    
-    def set_symbol(self, symbol):
         self.__symbol = symbol
-    
-    def get_symbol(self):
+
+    @property
+    def name(self) -> str:
+        return self.__name
+
+    @property
+    def symbol(self) -> str:
         return self.__symbol
+
+    def __str__(self) -> str:
+        return self.__name
 
 '''♠ ♥ ♦ ♣'''
