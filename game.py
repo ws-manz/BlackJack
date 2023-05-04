@@ -54,10 +54,7 @@ class Game:
     
     def get_next_card(self):
         return next(self.__card_iterator)
-    
-    def add_card(self, card) -> Card:
-        self.__deck.append(card)
-    
+        
     def get_cards(self):
         return self.__deck
     
