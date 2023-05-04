@@ -19,15 +19,12 @@ class Round:
             self.__dealer.deal_card(player)
         self.__dealer.deal_card(self.__dealer.get_player())
 
-        # Define o valor mínimo de pontos para parar de receber cartas, de acordo com o nível do jogador
-        level_min_values = {Level.BEGINNER: 17, Level.INTERMEDIATE: 18, Level.ADVANCED: 19}
-
         # Distribui mais cartas para cada jogador até que ele tenha atingido o valor mínimo para o nível dele ou tenha ultrapassado 21 pontos
         for player in self.__players:
             while True:
                 if player.get_hand_value() >= 21:
                     break
-                if player.get_hand_value() < level_min_values[player.get_user().level]:
+                if player.play() == "hit":
                     self.__dealer.deal_card(player)
                 else:
                     break
@@ -42,6 +39,13 @@ class Round:
         for player in self.__players:
             if player.get_hand_value() <= 21 and (dealer_value > 21 or player.get_hand_value() > dealer_value):
                 winners.append(player)
+                
+         # Exibe as cartas de cada jogador e do dealer
+        print("\nPlayers' cards and points:")
+        for player in self.__players:
+            print(f"{player.get_user().name}: {[card.name + ' ' + card.suit.symbol for card in player.get_hand()]} - Points: {player.get_hand_value()}")
+        print(f"Dealer: {[card.name + ' ' + card.suit.symbol for card in self.__dealer.get_player().get_hand()]} - Points: {self.__dealer.get_player().get_hand_value()}")
+        
         if len(winners) == 0:
             print("\nDealer wins! All players lost.")
         else:

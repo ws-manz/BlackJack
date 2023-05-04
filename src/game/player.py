@@ -3,11 +3,13 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from abc import ABC, abstractmethod
+
 from card.card import Card
 from game.user import User
 from typing import Any
 
-class Player:
+class Player(ABC):
     def __init__(self, user) -> None:
         self.__cards = []
         self.__user = user
@@ -32,3 +34,7 @@ class Player:
             hand_value -= 10
             aces_count -= 1
         return hand_value
+    
+    @abstractmethod
+    def play(self) -> Any:
+        pass

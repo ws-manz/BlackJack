@@ -1,13 +1,15 @@
 from game.game import Game
 from game.player import Player
+from game.botPlayer import BotPlayer
+from game.humanPlayer import HumanPlayer
 from game.user import User
 from game.level import Level
 
 def main():
     # Cria dois usuários, dois jogadores e adiciona eles no jogo
-    p1 = Player(User("Marco", Level.BEGINNER, 1000.00))
-    p2 = Player(User("Priscila", Level.INTERMEDIATE, 2000.00))
-    p3 = Player(User("Duda", Level.ADVANCED, 5000.00))
+    p1 = HumanPlayer(User("Marco", Level.BEGINNER, 1000.00))
+    p2 = BotPlayer(User("Priscila", Level.INTERMEDIATE, 2000.00))
+    p3 = BotPlayer(User("Duda", Level.ADVANCED, 5000.00))
     
     # Cria um novo jogo
     game = Game()

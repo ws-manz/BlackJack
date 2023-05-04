@@ -4,13 +4,14 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from game.level import Level
+from game.botPlayer import BotPlayer
 from game.player import Player
 from game.user import User
 from card.deck import Deck
 
 class Dealer:
     def __init__(self, deck = []):
-        self.__player = Player(User("Dealer", Level.ADVANCED, 100000))
+        self.__player = BotPlayer(User("Dealer", Level.ADVANCED, 100000))
         self.__deck = deck
         
     def get_player(self):
