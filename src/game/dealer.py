@@ -19,6 +19,7 @@ class Dealer:
     
     def reset_deck(self):
         self.__deck.reset_deck()
+        self.__player.reset_cards();
     
     def deal_card(self, player : Player):
         # Distribui uma carta para o jogador

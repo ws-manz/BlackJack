@@ -1,0 +1,31 @@
+Para aplicar o princípio SOLID na classe Round, vamos analisar cada um dos princípios:
+
+S - Single Responsibility Principle (Princípio da Responsabilidade Única)
+O - Open/Closed Principle (Princípio Aberto/Fechado)
+L - Liskov Substitution Principle (Princípio da Substituição de Liskov)
+I - Interface Segregation Principle (Princípio da Segregação de Interface)
+D - Dependency Inversion Principle (Princípio da Inversão de Dependência)
+Vamos começar aplicando o Princípio da Responsabilidade Única:
+
+Princípio da Responsabilidade Única (SRP)
+A classe Round tem várias responsabilidades, como distribuir cartas para os jogadores, permitir que os jogadores joguem e determinar o vencedor. Para aplicar o SRP, podemos separar essas responsabilidades em outras classes. Vamos criar três novas classes:
+
+CardDealer: essa classe será responsável por distribuir as cartas para os jogadores e para o dealer.
+GameLogic: essa classe será responsável por determinar o vencedor e por gerenciar a lógica do jogo.
+GameView: essa classe será responsável por exibir as cartas dos jogadores e do dealer.
+Com essa separação de responsabilidades, a classe Round ficaria responsável apenas por gerenciar a jogada de uma rodada.
+
+Princípio Aberto/Fechado (OCP)
+Para aplicar o Princípio Aberto/Fechado, devemos garantir que a classe Round esteja fechada para modificações, mas aberta para extensões. Isso significa que, se quisermos adicionar uma nova funcionalidade ao jogo, não devemos modificar a classe Round, mas sim estender sua funcionalidade em uma nova classe.
+
+Para implementar o OCP, podemos criar uma classe abstrata chamada GameRound que terá um método abstrato chamado play(). A classe Round deve herdar a classe GameRound e implementar o método play(). Se quisermos adicionar uma nova funcionalidade, podemos estender a classe GameRound e implementar o método play() de acordo com a nova funcionalidade.
+
+Princípio da Substituição de Liskov (LSP)
+O Princípio da Substituição de Liskov afirma que as subclasses devem ser substituíveis por suas superclasses sem alterar o comportamento do programa. Isso significa que, se criarmos uma nova classe que herda a classe Round, essa nova classe não deve alterar o comportamento da classe Round.
+
+Para aplicar o LSP, devemos garantir que a classe Round não possua dependências explícitas de suas subclasses. Isso significa que não devemos incluir lógica específica de subclasses na classe Round.
+
+Princípio da Segregação de Interface (ISP)
+O Princípio da Segregação de Interface afirma que as interfaces devem ser específicas para cada cliente que as utiliza. Isso significa que as interfaces devem ser divididas em partes menores e específicas para cada cliente, em vez de serem criadas interfaces grandes e genéricas.
+
+Para aplicar o ISP, devemos garantir que as interfaces sejam específicas para cada cliente que as utiliza. Isso significa que as interfaces devem ser divididas em partes menores e específicas para cada cliente, em vez de
