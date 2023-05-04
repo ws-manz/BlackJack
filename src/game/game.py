@@ -6,17 +6,31 @@ from game.dealer import Dealer  # importa a classe Dealer
 from card.deck import Deck 
 from game.round import Round # importa a classe Round
 
+
+from abc import ABC, abstractmethod
+
+class GameObserver(ABC):
+    @abstractmethod
+    def start_game(self):
+        pass
+
+class GameInputHandler(ABC):
+    @abstractmethod
+    def add_player(self, player: Player) -> Player:
+        pass
+    
 class Game:
+    #    def __init__(self, players: List[Player], dealer: Dealer, input_handler: GameInputHandler, observer: GameObserver) -> None:
     def __init__(self) -> None:
         self.__players = []
         self.__dealer = Dealer(Deck())    
         
     def reset_game(self):    
         print("Shuffled deck")
+        self.__dealer.reset_deck()
         
     def add_player(self, player : Player) -> Player :
         self.__players.append(player)
-        self.__dealer.reset_deck()
         
     def start_game(self) :
         # Verifica se há pelo menos um jogador no jogo
