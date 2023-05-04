@@ -1,5 +1,5 @@
-from card import Card
-from user import User
+from card.card import Card
+from game.user import User
 from typing import Any
 class Player:
     def __init__(self, user) -> None:

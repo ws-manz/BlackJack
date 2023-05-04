@@ -1,7 +1,7 @@
-from card import Card
-from suit import Suit
-from player import Player
-from user import User
+from card.card import Card
+from card.suit import Suit
+from game.player import Player
+from game.user import User
 import random
 
 class Game:
@@ -17,56 +17,48 @@ class Game:
     def add_player(self, player) -> Player :
         self.__players.append(player)
         
-    def test(self):
-        u1 = User("Marco", 1000)
-        u2 = User("Pricila",1000)
-        p1 = Player(u1)
-        p2 = Player(u2)
-        self.add_player(p1)
-        self.add_player(p2)
-        self.start_game()
-        
     def start_game(self) :
-        
+        # Verifica se há pelo menos um jogador no jogo
         if len(self.__players) == 0 :
             print("*Insufficient number of players*")
             return
-
+        # Informa que o jogo começou
         print("*Game started, welcome!*")
-        
-        for player in self.__players:
-            self.deal_card(player)
-        
-        for player in self.__players:
-            while player.get_hand_value() < 17:
-                self.deal_card(player)
-        
-        for player in self.__players:
-            print(f"### {player.get_user().get_name()} - Value {player.get_hand_value()} ###")
-            
-            for card in player.get_cards():
-                print(f"Card {card.get_name()} {card.get_suit().get_symbol()}")
-                
-            print(f"######################################")
-        
+        # Inicia a rodada
+        self.play_round()
+        # Reinicia o jogo
         self.reset_game()
         
     
-    def deal_first_round (self):
+    def play_round (self):
+        # Distribui uma carta para cada jogador
         for player in self.__players:
-            if(len(player.get_cards()) < 1):
+            self.deal_card(player)
+        # Continua distribuindo cartas para cada jogador até que ele tenha 17 pontos ou mais
+        for player in self.__players:
+            while player.get_hand_value() < 17:
                 self.deal_card(player)
+        # Exibe as cartas de cada jogador e seu valor total das cartas
+        for player in self.__players:
+            print(f"### {player.get_user().get_name()} - Value {player.get_hand_value()} ###")
+            for card in player.get_cards():
+                print(f"Card {card.get_name()} {card.get_suit().get_symbol()}")
+            print(f"######################################")
     
     def deal_card(self, player):
+        # Distribui uma carta para o jogador
         player.add_card(self.get_next_card())
         
     def get_next_card(self):
+        # Retorna a próxima carta do baralho
         return next(self.__card_iterator)
         
     def get_cards(self):
+        # Retorna o baralho completo
         return self.__deck
     
     def __create_suits(self):
+        # Cria as cartas de cada naipe
         suits = [("spade", "♠"), ("heart", "♥"), ("diamond", "♦"), ("clubs", "♣")]
         return (Suit(name, symbol) for name, symbol in suits)
     
