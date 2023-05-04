@@ -6,10 +6,10 @@ import random
 
 class Game:
     def __init__(self) -> None:
-        self._clear()
+        self.reset_game()
         self.__players = []
     
-    def _clear(self):        
+    def reset_game(self):        
         self.__deck = self.__create_deck()
         self.__card_iterator = iter(self.__deck)
         print("Shuffled deck")
@@ -34,8 +34,12 @@ class Game:
 
         print("*Game started, welcome!*")
         
-        self.first_round()
-        self.first_round()
+        for player in self.__players:
+            self.deal_card(player)
+        
+        for player in self.__players:
+            while player.get_hand_value() < 17:
+                self.deal_card(player)
         
         for player in self.__players:
             print(f"### {player.get_user().get_name()} - Value {player.get_hand_value()} ###")
@@ -45,13 +49,17 @@ class Game:
                 
             print(f"######################################")
         
-        self._clear()
+        self.reset_game()
+        
     
-    def first_round(self):
+    def deal_first_round (self):
         for player in self.__players:
-            if(len(player.get_cards()) < 2):
-                player.add_card(self.get_next_card())
+            if(len(player.get_cards()) < 1):
+                self.deal_card(player)
     
+    def deal_card(self, player):
+        player.add_card(self.get_next_card())
+        
     def get_next_card(self):
         return next(self.__card_iterator)
         
