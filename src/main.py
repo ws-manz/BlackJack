@@ -10,12 +10,6 @@ import random
 BOT_NAMES = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Julia', 'Karen', 'Lucas', 'Maria', 'Nathan', 'Oliver', 'Pamela', 'Quentin', 'Rachel', 'Simon', 'Tina', 'Ursula', 'Victoria', 'Wendy', 'Xavier', 'Yvonne', 'Zara']
 
 def main():
-    # Cria dois usuários, dois jogadores e adiciona eles no jogo
-    players = [
-        HumanPlayer(User("Marco", Level.BEGINNER, 1000.00)),
-        BotPlayer(User("Priscila", Level.INTERMEDIATE, 2000.00)),
-        BotPlayer(User("Duda", Level.ADVANCED, 5000.00))
-    ]
     # Cria um novo jogo
     game = Game()
 
@@ -30,13 +24,6 @@ def main():
 
     # Loop para adicionar os jogadores
     for i in range(num_players):
-        # Pergunta se o jogador será humano ou bot
-        player_type = input(f"Jogador {i+1}: Humano ou Bot? ").lower()
-
-        # Verifica se o tipo de jogador informado é válido
-        while player_type not in ["humano", "bot"]:
-            player_type = input(f"Jogador {i+1}: Humano ou Bot? ").lower()
-
         # Pergunta os dados do jogador (nome, nível e dinheiro)
         name = input(f"Jogador {i+1}: Qual é o seu nome? ")
         level = input(f"Jogador {i+1}: Qual é o seu nível? (beginner, intermediate, advanced) ").lower()
@@ -44,10 +31,7 @@ def main():
 
         # Cria o usuário e o jogador com os dados informados
         user = User(name, Level[level.upper()], money)
-        if player_type == "humano":
-            player = HumanPlayer(user)
-        else:
-            player = BotPlayer(user)
+        player = HumanPlayer(user)
 
         # Adiciona o jogador ao jogo
         game.add_player(player)
@@ -70,13 +54,16 @@ def main():
                     player = BotPlayer(user)
                     game.add_player(player)
                 break
-
-    # Adiciona os jogadores ao jogo
-    #for player in players:
-    #    game.add_player(player)
     
     # Inicia o jogo
-    game.start_game()
+    # Inicia o jogo
+    while True:
+        game.start_game()
+        answer = input("Deseja jogar novamente? (S/N) ")
+        if answer.upper() != "S":
+            break
+    
+    print("Fim de jogo.")
 
 if __name__ == "__main__":
     main()

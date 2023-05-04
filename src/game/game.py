@@ -28,6 +28,8 @@ class Game:
     def reset_game(self):    
         print("Shuffled deck")
         self.__dealer.reset_deck()
+        for player in self.__players:
+            player.reset_cards()
         
     def add_player(self, player : Player) -> Player :
         self.__players.append(player)

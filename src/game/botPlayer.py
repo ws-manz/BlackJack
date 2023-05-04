@@ -12,11 +12,9 @@ class BotPlayer(Player):
         super().__init__(user)
         
     
-    def play(self) -> Any:
+    def play(self) -> str:
         #hand_value = self.get_hand_value()
         #level_min_value = Level(self.user.level).get_threshold()
-        
-        
         
         if self.get_hand_value() < self.get_user().level.value[1]:
             return 'hit'

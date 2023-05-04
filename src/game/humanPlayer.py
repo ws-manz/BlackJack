@@ -11,7 +11,7 @@ class HumanPlayer(Player):
     def __init__(self, user) -> None:
         super().__init__(user)
             
-    def play(self) -> Any:
+    def play(self) -> str:
         while True:
             print(f"{self.get_user().name}: {[card.name + ' ' + card.suit.symbol for card in self.get_hand()]} - Points: {self.get_hand_value()}")
             
