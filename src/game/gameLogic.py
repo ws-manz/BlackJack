@@ -13,7 +13,7 @@ class GameLogic:
         self.players = players
         self.dealer = dealer
 
-    def determine_winners(self):
+    def get_winners(self):
         winners = []
         dealer_value = self.dealer.get_player().get_hand_value()
         for player in self.players:

@@ -11,29 +11,29 @@ from game.dealer import Dealer
 
 class CardDealer:
     def __init__(self, players: List[Player], dealer: Dealer, bet:float):
-        self.players = players
-        self.dealer = dealer
+        self.__players = players
+        self.__dealer = dealer
         self.__bet = bet
 
     def deal_cards(self):
-        for player in self.players:
-            if player.get_user().balance < self.__bet:
-            #if player.get_balance() < player.get_bet():
-                self.players.remove(player)
+        for player in self.__players:
+            if player.get_user().balance < self.__bet: # verifica se o saldo é suficiente para a aposta
+                self.__players.remove(player) # remove o jogador da lista de jogadores
                 continue
-            self.dealer.deal_card(player)
+            self.__dealer.deal_card(player)
 
-        self.dealer.deal_card(self.dealer.get_player())
+        self.__dealer.deal_card(self.__dealer.get_player())
 
-        while True:
-            players_in_game = [player for player in self.players if player.get_hand_value() < 21]
-            if not players_in_game:
-                break
-            for player in players_in_game:
+        # Distribui mais cartas para cada jogador até que ele tenha atingido o valor mínimo para o nível dele ou tenha ultrapassado 21 pontos
+        for player in self.__players:
+            while True:
+                if player.get_hand_value() >= 21:
+                    break
                 if player.play() == "hit":
-                    self.dealer.deal_card(player)
+                    self.__dealer.deal_card(player)
                 else:
                     break
 
-        while self.dealer.get_player().get_hand_value() < 17:
-            self.dealer.deal_card(self.dealer.get_player())
+        # Dealer continua comprando cartas até atingir 17 pontos ou mais
+        while self.__dealer.get_player().get_hand_value() < 17:
+            self.__dealer.deal_card(self.__dealer.get_player())

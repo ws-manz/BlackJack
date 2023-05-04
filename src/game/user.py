@@ -4,7 +4,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from game.level import Level
-
+from game.result import Result
+    
 class User:
     def __init__(self, name: str, level: Level= Level.BEGINNER, balance: float = 0.0) -> None:
         self.__name = name
@@ -31,12 +32,10 @@ class User:
             raise ValueError("Insufficient funds")
         self.__balance -= amount
     
-    def update_balance(self, result: int, bet:float) -> None:
-        if result == 0: # empate
-            return
-        elif result == 1: # usuário ganha
+    def update_balance(self, result: Result, bet:float) -> None:
+        if result == Result.WIN:
             self.add_funds(bet)
-        else: # usuário perde
+        elif result == Result.LOSS:
             self.remove_funds(bet)
         
     def __str__(self):
