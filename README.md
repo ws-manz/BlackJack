@@ -1,29 +1,30 @@
-# BlackJack
-Este é o repositório do projeto Blackjack. Este arquivo contém informações e orientações sobre o projeto e como contribuir com ele.
+# Blackjack
+Este é um simples jogo de blackjack (21) criado em Python.
 
-## Visão geral do projeto
-Este projeto é um jogo de Blackjack desenvolvido em Python. O objetivo é fornecer um jogo de cartas simples e divertido, utilizando conceitos básicos de programação orientada a objetos.
+## Como Jogar
+O objetivo do blackjack é vencer o dealer (banqueiro) obtendo uma mão total de cartas com um valor mais próximo de 21 do que a mão do dealer, sem ultrapassar 21.
 
-## Instalação
-Antes de começar a jogar, é necessário instalar o Python em sua máquina. Recomenda-se a versão mais recente do Python 3. Além disso, é preciso instalar a biblioteca pygame para rodar o jogo. Você pode instalar a biblioteca executando o seguinte comando no terminal:
+O jogo começa com duas cartas para cada jogador, incluindo o dealer. As cartas do jogador são distribuídas de frente para cima, enquanto a primeira carta do dealer é distribuída de frente para cima e a segunda de frente para baixo.
 
+Cada carta tem um valor de ponto. Cartas numéricas são valorizadas pelo seu número, cartas faciais (Rei, Rainha e Valete) têm um valor de 10 pontos e o Ás pode valer 1 ou 11, dependendo do valor que torna a mão mais próxima de 21.
 
+Após receber suas duas primeiras cartas, o jogador pode optar por ficar com sua mão atual (stand) ou pedir mais cartas (hit) para tentar se aproximar de 21.
 
-```sh
-pip install pygame 
+Se o jogador ultrapassar 21 pontos, ele perde automaticamente (bust).
+
+Depois que o jogador ficar satisfeito com sua mão, é a vez do dealer jogar. O dealer irá revelar sua carta de baixo e, se a soma de suas cartas for inferior a 17, ele continuará a receber mais cartas até que sua mão total seja 17 ou mais.
+
+Se o dealer ultrapassar 21 pontos, ele perde e o jogador ganha. Caso contrário, a mão do jogador é comparada com a do dealer e a mão mais próxima de 21 vence.
+
+## Como Executar o Jogo
+Certifique-se de ter o Python 3.x instalado em seu computador. Para jogar, basta baixar o arquivo blackjack.py e executá-lo no terminal com o seguinte comando:
+
+```python
+python blackjack.py
 ```
 
-## Como jogar
-Para jogar o Blackjack, basta executar o arquivo main.py na linha de comando. O jogo irá iniciar e você poderá jogar contra a máquina.
-
-## Contribuindo
-Se você quiser contribuir com o projeto, siga as seguintes orientações:
-
-Abra uma issue descrevendo a mudança que você gostaria de fazer ou o problema que encontrou.
-Crie um fork deste repositório e faça as mudanças em seu próprio fork.
-Abra um Pull Request descrevendo as mudanças que fez e referenciando a issue correspondente.
-Aguarde a revisão de um dos mantenedores do projeto.
-Ao contribuir com o projeto, certifique-se de seguir as melhores práticas de programação e documentação. Além disso, respeite o código de conduta do projeto.
+## Contribuições
+Contribuições são bem-vindas! Sinta-se à vontade para abrir um Pull Request com melhorias ou correções. Para grandes mudanças, por favor, abra um issue primeiro para discutir o que você gostaria de mudar.
 
 ## Licença
-Este projeto é licenciado sob a licença XYZ. Leia o arquivo LICENSE para mais informações.
+Este projeto é distribuído sob a licença MIT. Consulte o arquivo LICENSE para obter mais informações.
