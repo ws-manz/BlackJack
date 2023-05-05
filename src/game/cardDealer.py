@@ -8,9 +8,9 @@ from player.participant import Participant
 from player.humanPlayer import HumanPlayer
 from player.dealer import Dealer
 from utils.utils import Utils
+from utils.base_class import BaseClass
 
-
-class CardDealer:
+class CardDealer(BaseClass):
     def __init__(self, players: List[Participant], dealer: Dealer, bet:float):
         self.__players = players
         self.__dealer = dealer
@@ -29,7 +29,7 @@ class CardDealer:
         for player in self.__players:
             while True:
                 if isinstance(player, HumanPlayer):
-                    print(f"### {player.get_user().name} suas chances de blackjack são de {self.calculate_blackjack_probability(player)}% ###")
+                    self.logger.log(f"### {player.get_user().name} suas chances de blackjack são de {self.calculate_blackjack_probability(player)}% ###")
                 if player.calculate_hand_value() >= 21:
                     break
                 if player.play() == "hit":

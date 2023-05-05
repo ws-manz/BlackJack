@@ -7,8 +7,9 @@ from object_value.level import Level
 from player.botPlayer import BotPlayer
 from player.participant import Participant
 from game.user import User
+from utils.base_class import BaseClass
 
-class Dealer:
+class Dealer(BaseClass):
     def __init__(self, deck = []):
         self.__player = BotPlayer(User("Dealer", Level.ADVANCED, 100000))
         self.__deck = deck

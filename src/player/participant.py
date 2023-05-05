@@ -7,9 +7,10 @@ from abc import ABC, abstractmethod
 
 from card.card import Card
 from game.user import User
+from utils.base_class import BaseClass
 from typing import Any
 
-class Participant(ABC):
+class Participant(BaseClass, ABC):
     """
     Classe abstrata que representa um jogador.
     """

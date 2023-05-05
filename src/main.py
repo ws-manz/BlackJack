@@ -3,10 +3,12 @@ from player.botPlayer import BotPlayer
 from player.humanPlayer import HumanPlayer
 from game.user import User
 from object_value.level import Level
+from utils.console_logger import ConsoleLogger
 
 import random
 
 BOT_NAMES = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Julia', 'Karen', 'Lucas', 'Maria', 'Nathan', 'Oliver', 'Pamela', 'Quentin', 'Rachel', 'Simon', 'Tina', 'Ursula', 'Victoria', 'Wendy', 'Xavier', 'Yvonne', 'Zara']
+logger = ConsoleLogger()
 
 def create_player(player_num):
     # Pergunta os dados do jogador (nome, nível e dinheiro)
@@ -66,6 +68,7 @@ def main():
     # Inicia o jogo
     while True:
         game.start_game()
+        logger.print_logs()
         answer = input("Deseja jogar novamente? (S/N) ")
         if answer.upper() != "S":
             break

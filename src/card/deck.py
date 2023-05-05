@@ -8,9 +8,11 @@ from card.card import Card
 
 from card.card import Card
 from card.suit import Suit
+from utils.base_class import BaseClass
+
 import random
 
-class Deck:
+class Deck(BaseClass):
     def __init__(self):
         self.__cards = self.__create_deck()
         self.__card_iterator = iter(self.__cards)

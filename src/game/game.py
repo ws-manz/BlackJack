@@ -7,6 +7,7 @@ from player.participant import Participant
 from player.dealer import Dealer  # importa a classe Dealer
 from card.deck import Deck 
 from game.round import Round # importa a classe Round
+from utils.base_class import BaseClass
 
 from abc import ABC, abstractmethod
 
@@ -20,14 +21,14 @@ class GameInputHandler(ABC):
     def add_player(self, player: Participant) -> Participant:
         pass
     
-class Game:
+class Game(BaseClass):
     #    def __init__(self, players: List[Player], dealer: Dealer, input_handler: GameInputHandler, observer: GameObserver) -> None:
     def __init__(self) -> None:
         self.__players = []
         self.__dealer = Dealer(Deck())    
         
     def reset_game(self):    
-        print("Shuffled deck")
+        self.logger.log("Shuffled deck")
         self.__dealer.reset_deck()
         for player in self.__players:
             player.reset_cards()
@@ -41,10 +42,11 @@ class Game:
         
         # Verifica se há pelo menos um jogador no jogo
         if len(self.__players) == 0 :
-            print("*Insufficient number of players*")
+            self.logger.log("*Insufficient number of players*")
             return
         
-        print("*Game started, Welcome!*")
+        self.logger.log("*Game started, Welcome!*")
+        
         # Inicia a rodada
         self.play_round()
         

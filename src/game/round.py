@@ -9,9 +9,9 @@ from player.dealer import Dealer
 from game.gameLogic import GameLogic
 from game.cardDealer import CardDealer
 from game.gameView import GameView
+from utils.base_class import BaseClass
 
-
-class Round:
+class Round(BaseClass):
     def __init__(self, players: list[Participant], dealer: Dealer, bet: float = 100.00) -> None:
         self.__players = players
         self.__dealer = dealer
@@ -28,14 +28,14 @@ class Round:
         winners = self.__game_logic.get_winners()
                 
          # Exibe as cartas de cada jogador e do dealer
-        print("\nPlayers' cards and points:")
+        self.logger.log("\nPlayers' cards and points:")
         for player in self.__players:
             self.__game_view.display_player_cards(player)
         
         self.__game_view.display_dealer_cards()
 
         if len(winners) == 0:
-            print("\nDealer wins! All players lost.")
+            self.logger.log("\nDealer wins! All players lost.")
             for player in self.__players:
                 player.get_user().update_balance(Result.LOSS, self.__bet) 
         else:

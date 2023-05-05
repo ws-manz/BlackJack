@@ -21,4 +21,4 @@ class HumanPlayer(Participant):
             elif response.lower() == "stand":
                 return "stand"
             else:
-                print("Invalid input. Please try again.")
+                self.logger.log("Invalid input. Please try again.")

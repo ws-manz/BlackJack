@@ -7,8 +7,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from player.participant import Participant
 from object_value.level import Level
 from player.dealer import Dealer
+from utils.base_class import BaseClass
 
-class GameLogic:
+class GameLogic(BaseClass):
     def __init__(self, players: List[Participant], dealer: Dealer):
         self.players = players
         self.dealer = dealer  
