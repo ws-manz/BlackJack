@@ -12,15 +12,13 @@ from utils.base_class import BaseClass
 
 class CardDealer(BaseClass):
     def __init__(self, players: List[Participant], dealer: Dealer, bet:float):
-        self.__players = players
+        self.__players = [player for player in players if player.get_user().can_afford_bet(bet)]
+
         self.__dealer = dealer
         self.__bet = bet
 
     def deal_cards(self):
         for player in self.__players:
-            if not player.get_user().can_afford_bet(self.__bet): # verifica se o saldo é suficiente para a aposta
-                self.__players.remove(player) # remove o jogador da lista de jogadores
-                continue                    
             self.__dealer.deal_card(player)
 
         self.__dealer.deal_card(self.__dealer.get_player())

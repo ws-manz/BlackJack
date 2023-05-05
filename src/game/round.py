@@ -12,7 +12,7 @@ from game.gameView import GameView
 from utils.base_class import BaseClass
 
 class Round(BaseClass):
-    def __init__(self, players: list[Participant], dealer: Dealer, bet: float = 100.00) -> None:
+    def __init__(self, players: list[Participant], dealer: Dealer, bet: float = 1000.00) -> None:
         self.__players = players
         self.__dealer = dealer
         self.__bet = bet
