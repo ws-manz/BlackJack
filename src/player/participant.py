@@ -26,5 +26,5 @@ class Participant(BaseClass, ABC):
         return self.__user
 
     @abstractmethod
-    def play(self) -> str:
+    def wants_to_hit(self) -> bool:
         pass
