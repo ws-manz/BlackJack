@@ -64,11 +64,19 @@ class Player(ABC):
         Returns:
             int: Valor total da mão do jogador.
         """
-        hand_value = sum(card.value for card in self.__cards)
-        aces_count = sum(1 for card in self.__cards if card.name == 'Ace')
-        while hand_value > 21 and aces_count > 0:
-            hand_value -= 10
-            aces_count -= 1
+        hand_value = 0
+        aces_count = 0
+        for card in self.__cards:
+            if card.name != 'Ace':
+                hand_value += card.value
+            else:
+                aces_count += 1
+        
+        for i in range(aces_count):
+            if hand_value + 11 <= 21:
+                hand_value += 11
+            else:
+                hand_value += 1
         return hand_value
 
     @abstractmethod
