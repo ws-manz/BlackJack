@@ -18,7 +18,7 @@ class CardDealer:
 
     def deal_cards(self):
         for player in self.__players:
-            if player.get_user().balance < self.__bet: # verifica se o saldo é suficiente para a aposta
+            if player.get_user().can_afford_bet(self.__bet): # verifica se o saldo é suficiente para a aposta
                 self.__players.remove(player) # remove o jogador da lista de jogadores
                 continue                    
             self.__dealer.deal_card(player)

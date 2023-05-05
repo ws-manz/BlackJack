@@ -37,6 +37,9 @@ class User:
             self.add_funds(bet)
         elif result == Result.LOSS:
             self.remove_funds(bet)
+    
+    def can_afford_bet(self, amount: float) -> bool:
+        return amount <= self.__balance
         
     def __str__(self):
         return f"User {self.__name} - Level: {self.__level.value} - Balance: {self.__balance}"

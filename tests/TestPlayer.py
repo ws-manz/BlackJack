@@ -25,9 +25,8 @@ class TestPlayer(unittest.TestCase):
         self.__player.add_card(Card("Ace", 1, Suit("spade", "♠")))
         self.assertEqual(len(self.__player.get_hand()), 1)
         
-    def test_add_bet_insufficient_funds(self):
-        with self.assertRaises(ValueError):
-            self.__player.get_user().add_funds(200)
+    def test_can_afford_bet(self):
+        self.assertFalse(self.__player.get_user().can_afford_bet(10000.00))
 
 if __name__ == '__main__':
     unittest.main()        
