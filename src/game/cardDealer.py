@@ -30,7 +30,7 @@ class CardDealer(BaseClass):
                     self.logger.log(f"### {player.get_user().name} suas chances de blackjack são de {self.calculate_blackjack_probability(player)}% ###")
                 if player.hand.get_value() >= 21:
                     break
-                if player.play() == "hit":
+                if player.wants_to_hit():
                     self.__dealer.deal_card(player)
                 else:
                     break
