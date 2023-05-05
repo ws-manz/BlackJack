@@ -16,7 +16,7 @@ class BotPlayer(Participant):
         #hand_value = self.get_hand_value()
         #level_min_value = Level(self.user.level).get_threshold()
         
-        if self.calculate_hand_value() < self.get_user().level.value[1]:
+        if self.hand.get_value() < self.get_user().level.value[1]:
             return 'hit'
         else:
             return 'stand'

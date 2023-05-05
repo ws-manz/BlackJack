@@ -30,7 +30,7 @@ class CardDealer(BaseClass):
             while True:
                 if isinstance(player, HumanPlayer):
                     self.logger.log(f"### {player.get_user().name} suas chances de blackjack são de {self.calculate_blackjack_probability(player)}% ###")
-                if player.calculate_hand_value() >= 21:
+                if player.hand.get_value() >= 21:
                     break
                 if player.play() == "hit":
                     self.__dealer.deal_card(player)
@@ -38,12 +38,12 @@ class CardDealer(BaseClass):
                     break
 
         # Dealer continua comprando cartas até atingir 17 pontos ou mais
-        while self.__dealer.get_player().calculate_hand_value() < 17:
+        while self.__dealer.get_player().hand.get_value() < 17:
             self.__dealer.deal_card(self.__dealer.get_player())
     
     
-    def calculate_blackjack_probability(self, player):
+    def calculate_blackjack_probability(self, player:Participant):
         remaining_cards = self.__dealer.remaining_cards()
-        blackjack_prob = Utils.calculate_blackjack_probability(remaining_cards, player.get_hand())
+        blackjack_prob = Utils.calculate_blackjack_probability(remaining_cards, player.hand.get_cards())
 
         return blackjack_prob

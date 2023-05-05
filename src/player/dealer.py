@@ -19,11 +19,11 @@ class Dealer(BaseClass):
     
     def reset_deck(self):
         self.__deck.reset_deck()
-        self.__player.reset_cards()
+        self.__player.hand.clear_cards()
     
     def deal_card(self, player : Participant):
         # Distribui uma carta para o jogador
-        player.add_card(self.__deck.get_next_card())
+        player.hand.add_card(self.__deck.get_next_card())
         
     def remaining_cards(self):
         return self.__deck.get_cards()

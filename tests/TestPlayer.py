@@ -19,11 +19,11 @@ class TestPlayer(unittest.TestCase):
         
     def test_create_player(self):
         self.assertEqual(self.__player.get_user().name, "Player")
-        self.assertEqual(self.__player.get_hand(), [])
+        self.assertEqual(self.__player.hand.get_cards(), [])
 
     def test_add_card(self):
-        self.__player.add_card(Card("Ace", 1, Suit("spade", "♠")))
-        self.assertEqual(len(self.__player.get_hand()), 1)
+        self.__player.hand.add_card(Card("Ace", 1, Suit("spade", "♠")))
+        self.assertEqual(len(self.__player.hand.get_cards()), 1)
         
     def test_can_afford_bet(self):
         self.assertFalse(self.__player.get_user().can_afford_bet(10000.00))
