@@ -24,7 +24,13 @@ class GameView(BaseClass):
         self.logger.log("\n")
         for player in self.__players:
             if player in winners:
-                self.logger.log(f"{player.get_user().name} wins! {[card.name + ' ' + card.suit.symbol for card in player.get_hand()]} - Points: {player.calculate_hand_value()} - Bet: {player.get_user().balance}")
+                self.__display_player_wins_info(player)
             else:
-                self.logger.log(f"{player.get_user().name} loses. {[card.name + ' ' + card.suit.symbol for card in player.get_hand()]} - Points: {player.calculate_hand_value()} - Bet: {player.get_user().balance}")
+                self.__display_player_loss_info(player)
         self.logger.log("\n")        
+        
+    def __display_player_wins_info(self, player: Participant):
+        self.logger.log(f"{player.get_user().name} wins! {[str(card) for card in player.get_hand()]} - Points: {player.calculate_hand_value()} - Balance: {player.get_user().balance}")
+
+    def __display_player_loss_info(self, player: Participant):
+        self.logger.log(f"{player.get_user().name} loses. {[str(card) for card in player.get_hand()]} - Points: {player.calculate_hand_value()} - Balance: {player.get_user().balance}")

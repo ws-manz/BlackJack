@@ -25,7 +25,7 @@ def create_player(player_num):
 def create_bot(num_bots):
     level = random.choice(list(Level))  # Escolhe um nível aleatório para o bot
     balance = random.uniform(1000.00, 10000.00)  # Saldo aleatório entre 1000 e 10000
-    user = User(BOT_NAMES[num_bots], level, balance)
+    user = User(BOT_NAMES[num_bots], level, round(balance,0))
     player = BotPlayer(user)
 
     return player
