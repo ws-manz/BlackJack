@@ -5,24 +5,28 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.game.player import Player
+from src.player.humanPlayer import HumanPlayer
 from src.game.user import User
 from src.card.suit import Suit
 from src.card.card import Card
+from src.object_value.level import Level
 
 class TestPlayer(unittest.TestCase):
 
+    def setUp(self):
+        user = User('Player', Level.BEGINNER, 1000.00)
+        self.__player = HumanPlayer(user)
+        
     def test_create_player(self):
-        u1 = User("Marco", 1000)
-        player = Player(u1)
-        self.assertEqual(player.get_user().name, "Marco")
-        self.assertEqual(player.get_hand(), [])
+        self.assertEqual(self.__player.get_user().name, "Player")
+        self.assertEqual(self.__player.hand.get_cards(), [])
 
     def test_add_card(self):
-        u1 = User("Marco", 1000)
-        player = Player(u1)
-        player.add_card(Card("Ace", 1, Suit("spade", "♠")))
-        self.assertEqual(len(player.get_hand()), 1)
+        self.__player.hand.add_card(Card("Ace", 1, Suit("spade", "♠")))
+        self.assertEqual(len(self.__player.hand.get_cards()), 1)
+        
+    def test_can_afford_bet(self):
+        self.assertFalse(self.__player.get_user().can_afford_bet(10000.00))
 
 if __name__ == '__main__':
     unittest.main()        

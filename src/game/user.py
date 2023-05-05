@@ -3,9 +3,11 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.level import Level
-
-class User:
+from object_value.level import Level
+from object_value.result import Result
+from utils.base_class import BaseClass
+    
+class User(BaseClass):
     def __init__(self, name: str, level: Level= Level.BEGINNER, balance: float = 0.0) -> None:
         self.__name = name
         self.__balance = balance
@@ -31,13 +33,14 @@ class User:
             raise ValueError("Insufficient funds")
         self.__balance -= amount
     
-    def update_balance(self, result: int, bet:float) -> None:
-        if result == 0: # empate
-            return
-        elif result == 1: # usuário ganha
+    def update_balance(self, result: Result, bet:float) -> None:
+        if result == Result.WIN:
             self.add_funds(bet)
-        else: # usuário perde
+        elif result == Result.LOSS:
             self.remove_funds(bet)
+    
+    def can_afford_bet(self, amount: float) -> bool:
+        return amount <= self.__balance
         
     def __str__(self):
         return f"User {self.__name} - Level: {self.__level.value} - Balance: {self.__balance}"
