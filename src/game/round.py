@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from player.player import Player
+from player.participant import Participant
 from object_value.result import Result
 from player.dealer import Dealer
 from game.gameLogic import GameLogic
@@ -12,7 +12,7 @@ from game.gameView import GameView
 
 
 class Round:
-    def __init__(self, players: list[Player], dealer: Dealer, bet: float = 100.00) -> None:
+    def __init__(self, players: list[Participant], dealer: Dealer, bet: float = 100.00) -> None:
         self.__players = players
         self.__dealer = dealer
         self.__bet = bet

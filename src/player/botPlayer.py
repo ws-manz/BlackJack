@@ -3,11 +3,11 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from player.player import Player
+from player.participant import Participant
 from object_value.level import Level
 from typing import Any
 
-class BotPlayer(Player):
+class BotPlayer(Participant):
     def __init__(self, user) -> None:
         super().__init__(user)
         
@@ -16,7 +16,7 @@ class BotPlayer(Player):
         #hand_value = self.get_hand_value()
         #level_min_value = Level(self.user.level).get_threshold()
         
-        if self.get_hand_value() < self.get_user().level.value[1]:
+        if self.calculate_hand_value() < self.get_user().level.value[1]:
             return 'hit'
         else:
             return 'stand'

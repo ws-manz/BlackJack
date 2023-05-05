@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from player.player import Player
+from player.participant import Participant
 from player.dealer import Dealer  # importa a classe Dealer
 from card.deck import Deck 
 from game.round import Round # importa a classe Round
@@ -17,7 +17,7 @@ class GameObserver(ABC):
 
 class GameInputHandler(ABC):
     @abstractmethod
-    def add_player(self, player: Player) -> Player:
+    def add_player(self, player: Participant) -> Participant:
         pass
     
 class Game:
@@ -32,7 +32,7 @@ class Game:
         for player in self.__players:
             player.reset_cards()
         
-    def add_player(self, player : Player) -> Player :
+    def add_player(self, player : Participant) -> Participant :
         self.__players.append(player)
         
     def start_game(self) :

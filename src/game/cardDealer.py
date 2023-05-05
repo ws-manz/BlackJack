@@ -4,14 +4,14 @@ from typing import List
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from player.player import Player
+from player.participant import Participant
 from player.humanPlayer import HumanPlayer
 from player.dealer import Dealer
 from utils.utils import Utils
 
 
 class CardDealer:
-    def __init__(self, players: List[Player], dealer: Dealer, bet:float):
+    def __init__(self, players: List[Participant], dealer: Dealer, bet:float):
         self.__players = players
         self.__dealer = dealer
         self.__bet = bet
@@ -30,7 +30,7 @@ class CardDealer:
             while True:
                 if isinstance(player, HumanPlayer):
                     print(f"### {player.get_user().name} suas chances de blackjack são de {self.calculate_blackjack_probability(player)}% ###")
-                if player.get_hand_value() >= 21:
+                if player.calculate_hand_value() >= 21:
                     break
                 if player.play() == "hit":
                     self.__dealer.deal_card(player)
@@ -38,7 +38,7 @@ class CardDealer:
                     break
 
         # Dealer continua comprando cartas até atingir 17 pontos ou mais
-        while self.__dealer.get_player().get_hand_value() < 17:
+        while self.__dealer.get_player().calculate_hand_value() < 17:
             self.__dealer.deal_card(self.__dealer.get_player())
     
     

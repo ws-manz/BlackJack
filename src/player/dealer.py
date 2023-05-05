@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from object_value.level import Level
 from player.botPlayer import BotPlayer
-from player.player import Player
+from player.participant import Participant
 from game.user import User
 
 class Dealer:
@@ -20,7 +20,7 @@ class Dealer:
         self.__deck.reset_deck()
         self.__player.reset_cards()
     
-    def deal_card(self, player : Player):
+    def deal_card(self, player : Participant):
         # Distribui uma carta para o jogador
         player.add_card(self.__deck.get_next_card())
         

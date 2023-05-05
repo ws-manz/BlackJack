@@ -9,7 +9,7 @@ from card.card import Card
 from game.user import User
 from typing import Any
 
-class Player(ABC):
+class Participant(ABC):
     """
     Classe abstrata que representa um jogador.
     """
@@ -22,6 +22,7 @@ class Player(ABC):
             user (User): Objeto User que representa o jogador.
         """
         self.__user = user
+        self.__cards = []
         self.reset_cards()
 
     def add_card(self, card: Card) -> None:
@@ -57,7 +58,7 @@ class Player(ABC):
         """
         return self.__cards
 
-    def get_hand_value(self) -> int:
+    def calculate_hand_value(self) -> int:
         """
         Retorna o valor da mão do jogador.
 

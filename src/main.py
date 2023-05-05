@@ -1,5 +1,4 @@
 from game.game import Game
-from player.player import Player
 from player.botPlayer import BotPlayer
 from player.humanPlayer import HumanPlayer
 from game.user import User
