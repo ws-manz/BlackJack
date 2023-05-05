@@ -1,9 +1,9 @@
 from game.game import Game
-from game.player import Player
-from game.botPlayer import BotPlayer
-from game.humanPlayer import HumanPlayer
+from player.player import Player
+from player.botPlayer import BotPlayer
+from player.humanPlayer import HumanPlayer
 from game.user import User
-from game.level import Level
+from object_value.level import Level
 
 import random
 

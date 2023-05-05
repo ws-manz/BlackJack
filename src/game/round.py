@@ -3,9 +3,9 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.player import Player
-from game.result import Result
-from game.dealer import Dealer
+from player.player import Player
+from object_value.result import Result
+from player.dealer import Dealer
 from game.gameLogic import GameLogic
 from game.cardDealer import CardDealer
 from game.gameView import GameView

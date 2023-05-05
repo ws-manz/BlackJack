@@ -4,9 +4,9 @@ from typing import List
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.player import Player
-from game.level import Level
-from game.dealer import Dealer
+from player.player import Player
+from object_value.level import Level
+from player.dealer import Dealer
 
 class GameLogic:
     def __init__(self, players: List[Player], dealer: Dealer):

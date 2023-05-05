@@ -3,8 +3,8 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.level import Level
-from game.result import Result
+from object_value.level import Level
+from object_value.result import Result
     
 class User:
     def __init__(self, name: str, level: Level= Level.BEGINNER, balance: float = 0.0) -> None:

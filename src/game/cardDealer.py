@@ -4,9 +4,9 @@ from typing import List
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.player import Player
-from game.humanPlayer import HumanPlayer
-from game.dealer import Dealer
+from player.player import Player
+from player.humanPlayer import HumanPlayer
+from player.dealer import Dealer
 from utils.utils import Utils
 
 
@@ -18,7 +18,7 @@ class CardDealer:
 
     def deal_cards(self):
         for player in self.__players:
-            if player.get_user().can_afford_bet(self.__bet): # verifica se o saldo é suficiente para a aposta
+            if not player.get_user().can_afford_bet(self.__bet): # verifica se o saldo é suficiente para a aposta
                 self.__players.remove(player) # remove o jogador da lista de jogadores
                 continue                    
             self.__dealer.deal_card(player)

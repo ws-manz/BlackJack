@@ -3,9 +3,9 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.level import Level
-from game.botPlayer import BotPlayer
-from game.player import Player
+from object_value.level import Level
+from player.botPlayer import BotPlayer
+from player.player import Player
 from game.user import User
 
 class Dealer:

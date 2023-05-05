@@ -5,11 +5,11 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.game.humanPlayer import HumanPlayer
+from src.player.humanPlayer import HumanPlayer
 from src.game.user import User
 from src.card.suit import Suit
 from src.card.card import Card
-from src.game.level import Level
+from src.object_value.level import Level
 
 class TestPlayer(unittest.TestCase):
 

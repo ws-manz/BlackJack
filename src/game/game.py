@@ -3,8 +3,8 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.player import Player
-from game.dealer import Dealer  # importa a classe Dealer
+from player.player import Player
+from player.dealer import Dealer  # importa a classe Dealer
 from card.deck import Deck 
 from game.round import Round # importa a classe Round
 

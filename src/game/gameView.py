@@ -1,6 +1,6 @@
 from typing import List
-from game.player import Player
-from game.dealer import Dealer
+from player.player import Player
+from player.dealer import Dealer
 
 class GameView:
     def __init__(self, players: List[Player], dealer: Dealer) -> None:

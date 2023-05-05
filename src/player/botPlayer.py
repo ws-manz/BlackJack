@@ -3,8 +3,8 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from game.player import Player
-from game.level import Level
+from player.player import Player
+from object_value.level import Level
 from typing import Any
 
 class BotPlayer(Player):
