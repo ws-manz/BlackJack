@@ -24,7 +24,14 @@ class Dealer(BaseClass):
     def deal_card(self, player : Participant):
         # Distribui uma carta para o jogador
         player.hand.add_card(self.__deck.get_next_card())
-        
+    
+    def deal_dealer_card(self):
+        # Distribui uma carta para o dealer
+        self.__player.hand.add_card(self.__deck.get_next_card())
+    
+    def my_hand_value(self)        :
+        return self.__player.hand.get_value()
+    
     def remaining_cards(self):
         return self.__deck.get_cards()
 

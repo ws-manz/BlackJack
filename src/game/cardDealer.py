@@ -16,22 +16,24 @@ from utils.base_class import BaseClass
 class CardDealer(BaseClass):
     def __init__(self, players: List[Participant], dealer: Dealer, bet:float):
         self.__players = [player for player in players if player.get_user().can_afford_bet(bet)]
-
         self.__dealer = dealer
-        
-    def deal_cards(self):
+    
+    def distribute_cards(self):
         for player in self.__players:
             self.__dealer.deal_card(player)  # Distribui uma carta para cada jogador
-
-        self.__dealer.deal_card(self.__dealer.get_player()) # Distribui uma carta para o dealer
-
+        self.__dealer.deal_dealer_card() # Distribui uma carta para o dealer
         self.show_cards() # Mostra as cartas dos jogadores e do dealer
-        
-        # Distribui mais cartas para cada jogador até que ele tenha atingido o valor mínimo para o nível dele ou tenha ultrapassado 21 pontos
-        for player in self.__players:
-            while True:
+    
+    def distribute_cards_dealer(self):
+        # Dealer continua comprando cartas até atingir 17 pontos ou mais
+        while self.__dealer.my_hand_value() < 17:
+            self.__dealer.deal_card(self.__dealer.get_player())
+            
+    def __deal_additional_cards(self, player):
+        while True:
                 if isinstance(player, Player):
                     self.logger.log(f"### {player.get_user().name} your chances of blackjack are {self.calculate_blackjack_probability(player)}% ###")
+                    
                 if player.hand.get_value() >= 21:
                     break
                 
@@ -40,7 +42,7 @@ class CardDealer(BaseClass):
                         player.wants_to_surrender()
                         break
                 
-                if (player.get_user().level == Level.INTERMEDIATE or player.get_user().level == Level.ADVANCED) and len(player.hand.get_cards()) == 1 and player.hand.get_cards()[0].value == 10 and player.get_hand_choice() == HandChoice.HAND1:
+                if player.meets_strip_condition():
                     self.logger.log("Player's first card is a 10!")
                         
                 if player.wants_to_hit():
@@ -50,10 +52,16 @@ class CardDealer(BaseClass):
                 else:
                     break                
                 # Observação: Se jogador não ultrapassou 21 pontos ou não decidiu parar de comprar cartas, continue distribuindo mais cartas
-
-        # Dealer continua comprando cartas até atingir 17 pontos ou mais
-        while self.__dealer.get_player().hand.get_value() < 17:
-            self.__dealer.deal_card(self.__dealer.get_player())
+            
+    def deal_cards(self):
+        self.distribute_cards()
+        
+        # Distribui mais cartas para cada jogador até que ele tenha atingido o valor mínimo para o nível dele ou tenha ultrapassado 21 pontos
+        for player in self.__players:
+            self.__deal_additional_cards(player)
+        
+        self.distribute_cards_dealer()
+        
         
     def calculate_blackjack_probability(self, player:Participant):
         remaining_cards = self.__dealer.remaining_cards()

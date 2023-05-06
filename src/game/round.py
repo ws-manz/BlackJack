@@ -38,6 +38,9 @@ class Round(BaseClass):
         self.__card_dealer.deal_cards()        
         # Verifica o vencedor do jogo
         winners = self.__game_logic.get_winners()
+        winning_players = []
+        for winner in winners:
+            winning_players.append(winner[0])
                 
          # Exibe as cartas de cada jogador e do dealer
         self.logger.log("\n#### Players' cards and points ####")
@@ -53,14 +56,17 @@ class Round(BaseClass):
                 player.get_user().update_balance(Result.LOSS, self.__bet) 
         else:
             for player in self.__players:
-                if player in winners:
-                    player.get_user().update_balance(Result.WIN, self.__bet) # bonifica os vencedores com o dobro da aposta
+                if player in winning_players:
+                    for wins in winners:
+                        if wins[0] == player:
+                            for i in range(1, 2):
+                                player.get_user().update_balance(Result.WIN, self.__bet) # bonifica os vencedores com o dobro da aposta
                 else:
                     if(player.surrender):
                         player.get_user().update_balance(Result.LOSS, self.__bet/2) # penaliza os perdedores com o valor da aposta
                     else:
                         player.get_user().update_balance(Result.LOSS, self.__bet) # penaliza os perdedores com o valor da aposta
 
-        self.__game_view.display_round_result(winners)
+        self.__game_view.display_round_result(winning_players)
         
                 

@@ -5,9 +5,10 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from abc import ABC, abstractmethod
 
+from object_value.level import Level
 from object_value.handChoice import HandChoice
 from game.user import User
-from player.Hand import Hand
+from player.hand import Hand
 from utils.base_class import BaseClass
 from typing import Any
 
@@ -18,7 +19,6 @@ class Participant(BaseClass, ABC):
         self.__current_hand_index = 0  # índice da mão atual
         self.__surrender = False
         self.clear_hands() # limpar as mãos do jogador, para evitar que ao começar uma nova rodada já tenha cartas
-
     @property
     def hand(self):
         return self.__hands[self.__current_hand_index]
@@ -29,6 +29,9 @@ class Participant(BaseClass, ABC):
     def get_user(self) -> User:
         return self.__user
     
+    def get_hands(self) -> list[Hand]:
+        return (self.__hands)
+    
     @property
     def surrender(self):
         return self.__surrender
@@ -36,7 +39,7 @@ class Participant(BaseClass, ABC):
     @surrender.setter
     def surrender(self, surrender: bool):
         self.__surrender = surrender
-    
+            
     @abstractmethod  
     def wants_to_hit(self) -> bool:
         pass
@@ -62,3 +65,9 @@ class Participant(BaseClass, ABC):
             return HandChoice.HAND2
         else:
             return HandChoice.NONE
+        
+    def meets_strip_condition(self) -> bool:
+        return (self.get_user().level in [Level.INTERMEDIATE, Level.ADVANCED] and 
+                len(self.hand.get_cards()) == 1 and 
+                self.hand.get_cards()[0].value == 10 and 
+                self.get_hand_choice() == HandChoice.HAND1)
