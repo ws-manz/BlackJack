@@ -21,7 +21,7 @@ class Player(Participant):
         while True:
             self.logger.log(f"{self.get_user().name}: {[card.name + ' ' + card.suit.symbol for card in self.hand.get_cards()]} - Points: {self.hand.get_value()}")
 
-            response = self.__get_user_input(f"{self.get_user().name}, do you want to hit or stand? ", ['hit', 'stand', 'h', 's'])
+            response = self.__get_user_input(f"{self.get_user().name}, do you want to hit or stand or surrender? ", ['hit', 'stand', 'h', 's', 'surrender', 'sur'])
 
             if response in ['hit', 'h']:
                 return True

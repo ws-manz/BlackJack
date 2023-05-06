@@ -27,7 +27,7 @@ class CardDealer(BaseClass):
         for player in self.__players:
             while True:
                 if isinstance(player, Player):
-                    self.logger.log(f"### {player.get_user().name} suas chances de blackjack são de {self.calculate_blackjack_probability(player)}% ###")
+                    self.logger.log(f"### {player.get_user().name} your chances of blackjack are {self.calculate_blackjack_probability(player)}% ###")
                 if player.hand.get_value() >= 21:
                     break
                 
@@ -37,6 +37,8 @@ class CardDealer(BaseClass):
                         break
                     
                 if player.wants_to_hit():
+                    if player.surrender:
+                        break
                     self.__dealer.deal_card(player)
                 else:
                     break
