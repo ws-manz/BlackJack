@@ -36,22 +36,22 @@ class Game(BaseClass):
     def add_player(self, player : Participant) -> Participant :
         self.__players.append(player)
         
-    def start_game(self) :
+    def start_game(self) -> bool:
         # Reinicia o jogo
         self.reset_game()
         
         # Verifica se há pelo menos um jogador no jogo
         if len(self.__players) == 0 :
             self.logger.log("*Insufficient number of players*")
-            return
+            return False
         
         self.logger.log("*Game started, Welcome!*")
         
         # Inicia a rodada
         self.play_round()
-        
+        return True
     
     def play_round(self):
         round = Round(self.__players, self.__dealer) # cria o objeto Round
         round.play() # chama o método play() da classe Round para iniciar a rodada
-
+        self.__players = round.update_active_players()

@@ -1,6 +1,6 @@
 from game.game import Game
-from player.botPlayer import BotPlayer
-from player.humanPlayer import HumanPlayer
+from player.bot import Bot
+from player.player import Player
 from game.user import User
 from object_value.level import Level
 from utils.console_logger import ConsoleLogger
@@ -18,7 +18,7 @@ def create_player(player_num):
 
     # Cria o usuário e o jogador com os dados informados
     user = User(name, Level[level.upper()], money)
-    player = HumanPlayer(user)
+    player = Player(user)
 
     return player
 
@@ -26,7 +26,7 @@ def create_bot(num_bots):
     level = random.choice(list(Level))  # Escolhe um nível aleatório para o bot
     balance = random.uniform(1000.00, 10000.00)  # Saldo aleatório entre 1000 e 10000
     user = User(BOT_NAMES[num_bots], level, round(balance,0))
-    player = BotPlayer(user)
+    player = Bot(user)
 
     return player
 
@@ -67,11 +67,16 @@ def main():
 
     # Inicia o jogo
     while True:
-        game.start_game()
+        retorno = game.start_game()
         logger.print_logs()
-        answer = input("Deseja jogar novamente? (S/N) ")
-        if answer.upper() != "S":
+        
+        if(retorno):
+            answer = input("Deseja jogar novamente? (S/N) ")
+            if answer.upper() != "S":
+                break
+        else:
             break
+            
 
     print("Fim de jogo.")
 

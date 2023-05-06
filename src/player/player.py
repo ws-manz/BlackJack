@@ -4,15 +4,10 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from player.participant import Participant
-from object_value.level import Level
-from typing import Any
 
-class HumanPlayer(Participant):
+class Player(Participant):
     def __init__(self, user) -> None:
         super().__init__(user)
-
-    def __validate_play(self, play: str) -> bool:
-        return play.lower() in ['hit', 'stand', 's', 'h']
 
     def __get_user_input(self, prompt: str, valid_responses: list) -> str:
         while True:
@@ -32,3 +27,5 @@ class HumanPlayer(Participant):
                 return True
             elif response in ['stand', 's']:
                 return False
+            elif response in ['surrender', 'sur']:
+                return self.wants_to_surrender()
