@@ -46,12 +46,11 @@ def main():
 
     # Pergunta ao usuário quantos jogadores o jogo terá
     num_players = int(input("Quantos jogadores o jogo terá? "))
-    max_players = 8 # Define o máximo de jogadores permitidos
     
     # Verifica se a quantidade de jogadores informada é válida
-    if num_players <= 0 or num_players > max_players:
-        print("Quantidade de jogadores inválida. O jogo terá 2 jogadores.")
-        num_players = 2
+    if num_players <= 0 or num_players > game.max_players:
+        print("Quantidade de jogadores inválida. O jogo terá {game.max_players} jogadores.")
+        num_players = game.max_players
 
     # Adiciona o jogador humano
     player_num = 1

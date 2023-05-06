@@ -14,12 +14,10 @@ from typing import Any
 class Participant(BaseClass, ABC):
     def __init__(self, user: User) -> None:
         self.__user = user
-        #self.__hand = Hand()
         self.__hands = [Hand(), Hand()]  # lista contendo as duas mãos, inicialmente vazias
         self.__current_hand_index = 0  # índice da mão atual
-        self.clear_hands()
-
         self.__surrender = False
+        self.clear_hands() # limpar as mãos do jogador, para evitar que ao começar uma nova rodada já tenha cartas
 
     @property
     def hand(self):
@@ -55,6 +53,7 @@ class Participant(BaseClass, ABC):
     def get_hand_choice(self) -> HandChoice:
         has_cards_hand1 = bool(self.__hands[0].get_cards())
         has_cards_hand2 = bool(self.__hands[1].get_cards())
+        
         if has_cards_hand1 and has_cards_hand2:
             return HandChoice.BOTH
         elif has_cards_hand1:
