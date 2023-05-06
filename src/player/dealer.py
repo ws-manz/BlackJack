@@ -11,7 +11,7 @@ from utils.base_class import BaseClass
 
 class Dealer(BaseClass):
     def __init__(self, deck = []):
-        self.__player = Bot(User("Dealer", Level.ADVANCED, 100000))
+        self.__player = Bot(User("Dealer 🎰", Level.ADVANCED, 100000))
         self.__deck = deck
         
     def get_player(self):
