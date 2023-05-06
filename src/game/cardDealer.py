@@ -40,7 +40,7 @@ class CardDealer(BaseClass):
                         player.wants_to_surrender()
                         break
                 
-                if (player.level == Level.INTERMEDIATE or player.level == Level.ADVANCED) and len(player.hand.get_cards()) == 1 and player.hand.get_cards()[0].value == 10 and player.get_hand_choice() == HandChoice.HAND1:
+                if (player.get_user().level == Level.INTERMEDIATE or player.get_user().level == Level.ADVANCED) and len(player.hand.get_cards()) == 1 and player.hand.get_cards()[0].value == 10 and player.get_hand_choice() == HandChoice.HAND1:
                     self.logger.log("Player's first card is a 10!")
                         
                 if player.wants_to_hit():

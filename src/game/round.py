@@ -32,6 +32,8 @@ class Round(BaseClass):
     def play(self):
         self.clear_surrender_players()
         
+        self.__game_view.display_players_balance()
+        
         # Distribui uma carta para cada jogador e para o dealer
         self.__card_dealer.deal_cards()        
         # Verifica o vencedor do jogo

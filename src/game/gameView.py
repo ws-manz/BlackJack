@@ -7,6 +7,12 @@ class GameView(BaseClass):
     def __init__(self, players: List[Participant], dealer: Dealer) -> None:
         self.__players = players
         self.__dealer = dealer
+        
+    def display_players_balance(self):
+        self.logger.log("\nPlayers' balance:")
+        for player in self.__players:
+            self.logger.log(f"{player.get_user().name}: {player.get_user().balance}")
+        self.logger.log("\n")
     
     def display_player_cards(self, player: Participant):
         self.logger.log(f"{player.get_user().name}'s cards: {[card.name + ' ' + card.suit.symbol for card in player.hand.get_cards()]} - Points: {player.hand.get_value()}")
