@@ -31,7 +31,7 @@ class Game(BaseClass):
         self.logger.log("Shuffled deck")
         self.__dealer.reset_deck()
         for player in self.__players:
-            player.hand.clear_cards()
+            player.clear_hands()
         
     def add_player(self, player : Participant) -> Participant :
         self.__players.append(player)
