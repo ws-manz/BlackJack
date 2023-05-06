@@ -7,7 +7,14 @@ from utils.console_logger import ConsoleLogger
 
 import random
 
-BOT_NAMES = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Julia', 'Karen', 'Lucas', 'Maria', 'Nathan', 'Oliver', 'Pamela', 'Quentin', 'Rachel', 'Simon', 'Tina', 'Ursula', 'Victoria', 'Wendy', 'Xavier', 'Yvonne', 'Zara']
+#BOT_NAMES = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Julia', 'Karen', 'Lucas', 'Maria', 'Nathan', 'Oliver', 'Pamela', 'Quentin', 'Rachel', 'Simon', 'Tina', 'Ursula', 'Victoria', 'Wendy', 'Xavier', 'Yvonne', 'Zara']
+
+BOT_NAMES = []
+
+with open('bots.txt', 'r') as file:
+    for line in file:
+        BOT_NAMES.append(line.strip())
+        
 logger = ConsoleLogger()
 
 def create_player(player_num):

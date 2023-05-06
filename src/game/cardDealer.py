@@ -32,7 +32,7 @@ class CardDealer(BaseClass):
                     break
                 
                 if isinstance(player, Bot):
-                    if player.hand.get_value() >= 13 and player.hand.get_value() <= 14 and (self.__dealer.get_player().hand.get_cards()[0].value == 1 or self.__dealer.get_player().hand.get_cards()[0].value == 10):
+                    if player.hand.get_value() >= 13 and player.hand.get_value() <= 14 and (self.__dealer.get_player().hand.get_cards()[0].value == 1):
                         player.wants_to_surrender()
                         break
                     
