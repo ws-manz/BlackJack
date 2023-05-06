@@ -5,14 +5,16 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from object_value.level import Level
 from object_value.result import Result
+from object_value.Gender import Gender
 from utils.base_class import BaseClass
     
 class User(BaseClass):
-    def __init__(self, name: str, level: Level= Level.BEGINNER, balance: float = 0.0) -> None:
+    def __init__(self, name: str, level: Level= Level.BEGINNER, gender: Gender = Gender.MALE, balance: float = 0.0) -> None:
         self.__name = name
         self.__balance = balance
         self.__level = level
-    
+        self.__gender = gender
+        
     @property
     def name(self) -> str:
         return self.__name
@@ -24,6 +26,10 @@ class User(BaseClass):
     @property
     def level(self) -> Level:
         return self.__level
+    
+    @property
+    def gender(self) -> Gender:
+        return self.__gender
     
     def add_funds(self, amount: float) -> None:
         self.__balance += amount
