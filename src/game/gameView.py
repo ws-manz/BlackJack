@@ -27,16 +27,12 @@ class GameView(BaseClass):
                 self.__display_player_wins_info(player)
             self.__display_player_loss_info(player)
         
-        #for player in self.__players:    
-        #    self.__display_player_detail_info(player)
         self.logger.log("\n")        
         
     def __display_player_wins_info(self, player: Participant):
         for hand in player.get_hands():
             if hand.win:
                 self.logger.log(f"{player.get_user().name} win! {[str(card) for card in hand.get_cards()]} - Points: {hand.get_value()} - Balance: {player.get_user().balance}")
-        #else:
-        #    self.logger.log(f"{player.get_user().name} is not playing due to insufficient balance: {player.get_user().balance}")
             
     def __display_player_loss_info(self, player: Participant):
         for hand in player.get_hands():
@@ -49,11 +45,3 @@ class GameView(BaseClass):
     def __display_player_detail_info(self, player: Participant):
         for hand in player.get_hands():
             self.logger.log(f"{player.get_user().name} info. {[str(card) for card in hand.get_cards()]} - Points: {hand.get_value()} - Balance: {player.get_user().balance}")
-        
-        
-        #if(player.surrender):
-        #    self.logger.log(f"{player.get_user().name} surrender. {[str(card) for card in player.hand.get_cards()]} - Points: {player.hand.get_value()} - Balance: {player.get_user().balance}")
-        #else:
-        #    for hand in player.get_hands():
-        #        if hand.get_value() > 0:
-        #            self.logger.log(f"{player.get_user().name} loses. {[str(card) for card in hand.get_cards()]} - Points: {hand.get_value()} - Balance: {player.get_user().balance}")
