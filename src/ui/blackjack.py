@@ -1,19 +1,11 @@
+from object_value.result import Result
 import pygame
 import sys
 import pygame.time
 
-class HandPlayerRect:
-    def __init__(self, player, rects : list):
-        self.__player = player
-        self.__rects = rects
-    
-    def get_player(self):
-        return self.__player
-    
-    def get_rects(self):
-        return self.__rects
-        
-class BlackjackForm:
+from ui.HandPlayerRect import HandPlayerRect
+
+class Blackjack:
     
     # Define o tamanho da janela
     WINDOW_WIDTH = 1024
@@ -137,8 +129,8 @@ class BlackjackForm:
             player_rects.append(player_rect)
 
             self.draw_player_rect(player_rect)
-            self.draw_text_on_screen(self.players[i], self.FONT_NAME_PATH, 15, self.COLOR_FONT_DEFAULT, player_rect.centerx, player_rect.bottom + 5, self.screen)
-            self.draw_text_on_screen('${:,.2f}'.format(1000), self.FONT_NAME_PATH, 15, self.COLOR_FONT_DEFAULT, player_rect.centerx, player_rect.bottom + 25, self.screen)
+            self.draw_text_on_screen(self.players[i].get_user().name, self.FONT_NAME_PATH, 15, self.COLOR_FONT_DEFAULT, player_rect.centerx, player_rect.bottom + 5, self.screen)
+            self.draw_text_on_screen('${:,.2f}'.format(self.players[i].get_user().balance), self.FONT_NAME_PATH, 15, self.COLOR_FONT_DEFAULT, player_rect.centerx, player_rect.bottom + 25, self.screen)
             self.draw_player_cards(player_rect)
 
     def draw_player_rect(self, player_rect):
@@ -146,7 +138,7 @@ class BlackjackForm:
         pygame.draw.rect(self.screen, self.BLACKJACK_TABLE_COLOR, player_rect)
         pygame.draw.rect(self.screen, self.TABLE_BORDER_COLOR, player_rect, 2)
         
-    def draw_text_on_screen(self, text:str, font_path:str, size:int, color, x:int, y:int, surface):
+    def draw_text_on_screen(self, text, font_path:str, size:int, color, x:int, y:int, surface):
         font = pygame.font.Font(font_path, size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect(centerx=x, top=y)
@@ -214,15 +206,14 @@ class BlackjackForm:
                 #self.card_sound.play()
                 
                 self.draw_card(rect0.x+5, rect0.y+5, 7, '♥')
-                self.draw_card(rect1.x+5, rect1.y+5, 'K', '♣')
-
                 self.draw_card(rect0.x+10, rect0.y-5, 10, '♣')
-                self.draw_card(rect0.x+20, rect0.y-15, 10, '♥')
-                self.draw_card(rect0.x+30, rect0.y-25, 10, '♣')
+                self.draw_card(rect0.x+15, rect0.y-15, 10, '♥')
+                self.draw_card(rect0.x+20, rect0.y-25, 10, '♣')
 
+                self.draw_card(rect1.x+5, rect1.y+5, 'K', '♣')
                 self.draw_card(rect1.x+10, rect1.y-5, 10, '♣')
-                self.draw_card(rect1.x+20, rect1.y-15, 10, '♥')
-                self.draw_card(rect1.x+30, rect1.y-25, 10, '♣')
+                self.draw_card(rect1.x+15, rect1.y-15, 10, '♥')
+                self.draw_card(rect1.x+20, rect1.y-25, 10, '♣')
 
             self.draw_card(575, 135, 'A', '♣')
 
@@ -230,6 +221,7 @@ class BlackjackForm:
         pygame.display.flip()
         
     def run_game(self):
+        
         # Loop principal do jogo        
         while True:
             for event in pygame.event.get():
@@ -238,10 +230,10 @@ class BlackjackForm:
                     sys.exit()
 
             # verifica se houve mudanças no estado do jogo
+            print(f" {self.game_state} - {self.previous_game_state}")
             if self.game_state != self.previous_game_state:
                 # chama os métodos de desenho apenas se houve mudanças
                 self.update_screen()
-
                 # atualiza o estado anterior do jogo
                 self.previous_game_state = self.game_state
     
@@ -271,4 +263,6 @@ class BlackjackForm:
 
     def end_round(self):
         # finaliza a rodada e atualiza o estado do jogo
+        for player in self.players:
+            player.get_user().update_balance(Result.LOSS, 199)
         self.game_state = "ending_round"
