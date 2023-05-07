@@ -36,7 +36,8 @@ class User(BaseClass):
 
     def remove_funds(self, amount: float) -> None:
         if amount > self.__balance:
-            raise ValueError("Insufficient funds")
+            #raise ValueError("Insufficient funds")
+            return
         self.__balance -= amount
     
     def update_balance(self, result: Result, bet:float) -> None:

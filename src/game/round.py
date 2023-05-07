@@ -61,15 +61,16 @@ class Round(BaseClass):
         else:
             for player in self.__players:
                 for hand in player.get_hands():
-                    if hand.win:
-                        player.get_user().update_balance(Result.WIN, self.__bet) # bonifica os vencedores com o dobro da aposta
-                    else:
-                        if hand.surrender:
-                            print(f" {player.get_user().name} surrender => {hand.win}")
-                            player.get_user().update_balance(Result.LOSS, self.__bet/2) # penaliza os perdedores com o valor da aposta
+                    if(hand.get_value() > 0):
+                        if hand.win:
+                            player.get_user().update_balance(Result.WIN, self.__bet) # bonifica os vencedores com o dobro da aposta
                         else:
-                            print(f" {player.get_user().name} loss => {hand.win}")
-                            player.get_user().update_balance(Result.LOSS, self.__bet) # penaliza os perdedores com o valor da aposta
+                            if hand.surrender:
+                                print(f" {player.get_user().name} surrender => {hand.win}")
+                                player.get_user().update_balance(Result.LOSS, self.__bet/2) # penaliza os perdedores com o valor da aposta
+                            else:
+                                print(f" {player.get_user().name} loss => {hand.win}")
+                                player.get_user().update_balance(Result.LOSS, self.__bet) # penaliza os perdedores com o valor da aposta
                                             
         self.__game_view.display_round_result(winning_players)
         
