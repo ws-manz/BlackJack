@@ -9,8 +9,8 @@ from player.player import Player
 from player.bot import Bot
 from player.dealer import Dealer
 from utils.utils import Utils
-from object_value.level import Level
-from object_value.handChoice import HandChoice
+#from object_value.level import Level
+#from object_value.handChoice import HandChoice
 from utils.base_class import BaseClass
 
 class CardDealer(BaseClass):
@@ -29,8 +29,18 @@ class CardDealer(BaseClass):
         while self.__dealer.my_hand_value() < 17:
             self.__dealer.deal_card(self.__dealer.get_player())
             
-    def __deal_additional_cards(self, player):
-        while True:
+    def __deal_additional_cards(self, player:Participant):
+        
+        if player.meets_strip_condition():
+            self.strip(player)
+           
+        current_hand_index = 0
+        for my_hand in player.get_hands():   
+            if(not my_hand.has_cards()):
+                break
+            player.switch_hand(current_hand_index)     
+            current_hand_index =1    
+            while True:                                          
                 if isinstance(player, Player):
                     self.logger.log(f"### {player.get_user().name} your chances of blackjack are {self.calculate_blackjack_probability(player)}% ###")
                     
@@ -42,17 +52,28 @@ class CardDealer(BaseClass):
                         player.wants_to_surrender()
                         break
                 
-                if player.meets_strip_condition():
-                    self.logger.log("Player's first card is a 10!")
-                        
                 if player.wants_to_hit():
-                    if player.surrender:
+                    if player.hand.surrender: #  player.surrender:
                         break                            
                     self.__dealer.deal_card(player)
                 else:
                     break                
-                # Observação: Se jogador não ultrapassou 21 pontos ou não decidiu parar de comprar cartas, continue distribuindo mais cartas
-            
+        # Observação: Se jogador não ultrapassou 21 pontos ou não decidiu parar de comprar cartas, continue distribuindo mais cartas
+        current_hand_index = 0
+    
+    def strip(self, player):
+        self.logger.log("Player's first card is a 10!")
+        if isinstance(player, Player):
+            response = input("Do you want to strip? (Sim/Não): ")
+            if response.lower() in ["sim", "s"]:
+                player.switch_hand(1)
+                self.__dealer.deal_card(player)
+                player.switch_hand(0)
+        elif(isinstance(player, Bot)):
+            player.switch_hand(1)
+            self.__dealer.deal_card(player)
+            player.switch_hand(0)
+                                 
     def deal_cards(self):
         self.distribute_cards()
         

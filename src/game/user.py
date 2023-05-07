@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from object_value.level import Level
 from object_value.result import Result
-from object_value.Gender import Gender
+from object_value.gender import Gender
 from utils.base_class import BaseClass
     
 class User(BaseClass):

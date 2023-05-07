@@ -35,10 +35,12 @@ class Round(BaseClass):
         self.__game_view.display_players_balance()
         
         # Distribui uma carta para cada jogador e para o dealer
-        self.__card_dealer.deal_cards()        
+        self.__card_dealer.deal_cards()   
+             
         # Verifica o vencedor do jogo
         winners = self.__game_logic.get_winners()
         winning_players = []
+        
         for winner in winners:
             winning_players.append(winner[0])
                 
@@ -53,20 +55,22 @@ class Round(BaseClass):
         if len(winners) == 0:
             self.logger.log("\nDealer wins! All players lost.")
             for player in self.__players:
-                player.get_user().update_balance(Result.LOSS, self.__bet) 
+                for hand in player.get_hands():
+                    if hand.get_value() > 0:
+                        player.get_user().update_balance(Result.LOSS, self.__bet) 
         else:
             for player in self.__players:
-                if player in winning_players:
-                    for wins in winners:
-                        if wins[0] == player:
-                            for i in range(1, 2):
-                                player.get_user().update_balance(Result.WIN, self.__bet) # bonifica os vencedores com o dobro da aposta
-                else:
-                    if(player.surrender):
-                        player.get_user().update_balance(Result.LOSS, self.__bet/2) # penaliza os perdedores com o valor da aposta
+                for hand in player.get_hands():
+                    if hand.win:
+                        player.get_user().update_balance(Result.WIN, self.__bet) # bonifica os vencedores com o dobro da aposta
                     else:
-                        player.get_user().update_balance(Result.LOSS, self.__bet) # penaliza os perdedores com o valor da aposta
-
+                        if hand.surrender:
+                            print(f" {player.get_user().name} surrender => {hand.win}")
+                            player.get_user().update_balance(Result.LOSS, self.__bet/2) # penaliza os perdedores com o valor da aposta
+                        else:
+                            print(f" {player.get_user().name} loss => {hand.win}")
+                            player.get_user().update_balance(Result.LOSS, self.__bet) # penaliza os perdedores com o valor da aposta
+                                            
         self.__game_view.display_round_result(winning_players)
         
                 

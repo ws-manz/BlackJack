@@ -12,6 +12,7 @@ class Hand:
             cards = []
         self.__cards = cards
         self.__win= False
+        self.__surrender= False
         
     @property
     def win(self):
@@ -20,6 +21,14 @@ class Hand:
     @win.setter
     def win(self, win: bool):
         self.__win = win
+        
+    @property
+    def surrender(self):
+        return self.__surrender
+    
+    @surrender.setter
+    def surrender(self, surrender: bool):
+        self.__surrender = surrender
 
     def add_card(self, card: Card):
         self.__cards.append(card)
@@ -30,6 +39,7 @@ class Hand:
     def clear_cards(self):
         self.__cards.clear()
         self.__win= False
+        self.__surrender = False
 
     def get_cards(self) -> list[Card]:
         return self.__cards
@@ -57,4 +67,4 @@ class Hand:
         return self.get_value() > 21
 
     def is_blackjack(self) -> bool:
-        return len(self.__cards)
+        return self.get_value()== 21

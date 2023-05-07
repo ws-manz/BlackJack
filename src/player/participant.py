@@ -47,6 +47,7 @@ class Participant(BaseClass, ABC):
     def wants_to_surrender(self) -> bool:
         self.logger.log(f"{self.get_user().name} chose to surrender. Quit the game.")
         self.__surrender = True
+        self.__hands[self.__current_hand_index].surrender = True
         return True
     
     def clear_hands(self):

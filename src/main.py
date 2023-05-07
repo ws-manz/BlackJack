@@ -3,7 +3,7 @@ from player.bot import Bot
 from player.player import Player
 from game.user import User
 from object_value.level import Level
-from object_value.Gender import Gender
+from object_value.gender import Gender
 from utils.console_logger import ConsoleLogger
 
 import random
