@@ -1,6 +1,6 @@
 * Após analisar o repositório, algumas sugestões de funcionalidades que poderiam ser adicionadas ao jogo são:
-* Apostas múltiplas: permitir que o jogador possa fazer mais de uma aposta na mesma rodada, aumentando as possibilidades de ganhar mais dinheiro;
-* Divisão de mãos: permitir que o jogador divida uma mão em duas, se as duas primeiras cartas forem do mesmo valor, aumentando as possibilidades de ganhar;
+* Apostas múltiplas: permitir que o jogador possa fazer mais de uma aposta na mesma rodada, aumentando as possibilidades de ganhar mais dinheiro; ✓
+* Divisão de mãos: permitir que o jogador divida uma mão em duas, se as duas primeiras cartas forem do mesmo valor, aumentando as possibilidades de ganhar; ✓
 * Seguro: permitir que o jogador faça uma aposta de seguro caso a carta revelada do dealer seja um Ás, com a possibilidade de receber metade da aposta original caso o dealer faça um blackjack; ✓
 * Surrender: permitir que o jogador desista de uma mão, perdendo metade da aposta original, caso perceba que suas chances de ganhar são muito baixas; ✓
 * Mais opções para o jogador: adicionar funcionalidades como dobrar a aposta, dobrar a mão, entre outras, que possam aumentar as possibilidades de vitória do jogador.
