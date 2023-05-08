@@ -60,7 +60,7 @@ class CardDealer(BaseClass):
         current_hand_index = 0
     
     def strip(self, player):
-        self.logger.log("Player's first card is a 10!")
+        #self.logger.log("Player's first card is a 10!")
         if isinstance(player, Player):
             response = input("Do you want to strip? (Sim/Não): ")
             if response.lower() in ["sim", "s"]:

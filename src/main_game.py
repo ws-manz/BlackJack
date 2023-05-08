@@ -36,7 +36,7 @@ class MyGame:
             self.__game.add_player(player)
         
         retorno = self.__game.start_game()
-        logger.print_logs()
+        logger.print_result_logs()
         
         form = Blackjack(self.__game.get_players())
         #form.start_game()

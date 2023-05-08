@@ -1,5 +1,6 @@
 import os
 import sys
+from game.playerManager import PlayerManager
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -21,6 +22,7 @@ class Round(BaseClass):
         self.__game_logic = GameLogic(self.__players,  self.__dealer)
         self.__card_dealer = CardDealer(self.__players, self.__dealer, self.__bet)
         self.__game_view = GameView(self.__players, self.__dealer)
+        self.__player_manager = PlayerManager(bet)
     
     def update_active_players(self):
         return [player for player in self.__players if player.get_user().can_afford_bet(self.__bet)]
@@ -52,25 +54,10 @@ class Round(BaseClass):
         self.logger.log("\n#### Dealer cards and points ####")
         self.__game_view.display_dealer_cards()
 
-        if len(winners) == 0:
-            self.logger.log("\nDealer wins! All players lost.")
-            for player in self.__players:
-                for hand in player.get_hands():
-                    if hand.get_value() > 0:
-                        player.get_user().update_balance(Result.LOSS, self.__bet) 
-        else:
-            for player in self.__players:
-                for hand in player.get_hands():
-                    if(hand.get_value() > 0):
-                        if hand.win:
-                            player.get_user().update_balance(Result.WIN, self.__bet) # bonifica os vencedores com o dobro da aposta
-                        else:
-                            if hand.surrender:
-                                print(f" {player.get_user().name} surrender => {hand.win}")
-                                player.get_user().update_balance(Result.LOSS, self.__bet/2) # penaliza os perdedores com o valor da aposta
-                            else:
-                                print(f" {player.get_user().name} loss => {hand.win}")
-                                player.get_user().update_balance(Result.LOSS, self.__bet) # penaliza os perdedores com o valor da aposta
+        # Atualiza o saldo dos jogadores
+        self.__player_manager.update_balances(self.__players, winners)
+        
+        
                                             
         self.__game_view.display_round_result(winning_players)
         

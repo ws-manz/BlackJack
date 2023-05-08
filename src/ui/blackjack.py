@@ -1,7 +1,8 @@
 import pygame
 import sys
 import pygame.time
-
+import threading
+from threading import Thread
 from object_value.result import Result
 from ui.HandPlayerRect import HandPlayerRect
 
@@ -200,6 +201,10 @@ class Blackjack:
 
         # Atualiza a tela
         pygame.display.flip()
+    
+    def play(self):
+        thread = Thread(target=self.run_game)
+        thread.start()
         
     def run_game(self):
         
@@ -211,7 +216,7 @@ class Blackjack:
                     sys.exit()
 
             # verifica se houve mudanças no estado do jogo
-            print(f" {self.game_state} - {self.previous_game_state}")
+            #print(f" {self.game_state} - {self.previous_game_state}")
             if self.game_state != self.previous_game_state:
                 # chama os métodos de desenho apenas se houve mudanças
                 self.update_screen()

@@ -10,9 +10,12 @@ class GameView(BaseClass):
         
     def display_players_balance(self):
         self.logger.log("\nPlayers' balance:")
+        self.logger.result_log("\nPlayers' balance:")
         for player in self.__players:
             self.logger.log(f"Player: {player.get_user().name} Gender: {player.get_user().gender} Level: {player.get_user().level} Balance: {player.get_user().balance}")
+            self.logger.result_log(f"Player: {player.get_user().name} Gender: {player.get_user().gender} Level: {player.get_user().level} Balance: {player.get_user().balance}")
         self.logger.log("\n")
+        self.logger.result_log("\n")
     
     def display_player_cards(self, player: Participant):
         self.logger.log(f"{player.get_user().name}'s cards: {[card.name + ' ' + card.suit.symbol for card in player.hand.get_cards()]} - Points: {player.hand.get_value()}")
