@@ -1,5 +1,6 @@
 import os
 import sys
+import random
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -7,7 +8,7 @@ from player.participant import Participant
 
 class Player(Participant):
     def __init__(self, user) -> None:
-        super().__init__(user)
+        super().__init__(user)      
 
     def __get_user_input(self, prompt: str, valid_responses: list) -> str:
         while True:
@@ -24,8 +25,13 @@ class Player(Participant):
             response = self.__get_user_input(f"{self.get_user().name}, do you want to hit or stand or surrender? ", ['hit', 'stand', 'h', 's', 'surrender', 'sur'])
 
             if response in ['hit', 'h']:
+                self.logger.log(f"{self.get_user().name} says: {random.choice(super().HITS)}") 
                 return True
             elif response in ['stand', 's']:
+                self.logger.log(f"{self.get_user().name} says: {random.choice(super().STANDS)}") 
                 return False
             elif response in ['surrender', 'sur']:
-                return self.wants_to_surrender()
+                has_surrender = self.wants_to_surrender()
+                if(has_surrender):
+                    self.logger.log(f"{self.get_user().name} says: {random.choice(super().SURRENDERS)}") 
+                return has_surrender

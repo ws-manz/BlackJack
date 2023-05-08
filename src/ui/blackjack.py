@@ -169,8 +169,14 @@ class Blackjack:
         symbol_color = (0, 0, 0)
 
         # Define as posições dos elementos na carta
+
+        if(len(str(value)) < 2):
+            x_upd = self.CARD_RECT_WIDTH-24
+        else:
+            x_upd = self.CARD_RECT_WIDTH-28
+
         center_pos = (x + card_width // 2, y + card_height // 2)
-        bottom_left_pos = (x+2, y + card_height)
+        bottom_left_pos = (x+x_upd, y + card_height)
 
         # Define a cor da fonte com base no naipe da carta
         if suit in ["Hearts", "Diamonds", "♥", "♦"]:
@@ -247,15 +253,15 @@ class Blackjack:
                 #pygame.time.set_timer(pygame.USEREVENT, 3000)
                 #self.card_sound.play()
                 
-                self.draw_card(rect0.x+5, rect0.y+5, 7, '♥')
-                self.draw_card(rect0.x+10, rect0.y-5, 10, '♣')
-                self.draw_card(rect0.x+15, rect0.y-15, 10, '♥')
-                self.draw_card(rect0.x+20, rect0.y-25, 10, '♣')
+                self.draw_card(rect0.x+5, rect0.y+5, '7', '♥')
+                self.draw_card(rect0.x+10, rect0.y-5, '5', '♣')
+                self.draw_card(rect0.x+15, rect0.y-15, '10', '♥')
+                self.draw_card(rect0.x+20, rect0.y-25, '9', '♣')
 
                 self.draw_card(rect1.x+5, rect1.y+5, 'K', '♣')
-                self.draw_card(rect1.x+10, rect1.y-5, 10, '♣')
-                self.draw_card(rect1.x+15, rect1.y-15, 10, '♥')
-                self.draw_card(rect1.x+20, rect1.y-25, 10, '♣')
+                self.draw_card(rect1.x+10, rect1.y-5, '8', '♣')
+                self.draw_card(rect1.x+15, rect1.y-15, '10', '♥')
+                self.draw_card(rect1.x+20, rect1.y-25, 'K', '♣')
 
             self.draw_card(575, 135, 'A', '♣')
 
