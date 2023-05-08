@@ -9,8 +9,9 @@ from object_value.gender import Gender
 from utils.base_class import BaseClass
     
 class User(BaseClass):
-    def __init__(self, name: str, level: Level= Level.BEGINNER, gender: Gender = Gender.MALE, balance: float = 0.0) -> None:
+    def __init__(self, name: str, username:str, level: Level= Level.BEGINNER, gender: Gender = Gender.MALE, balance: float = 0.0) -> None:
         self.__name = name
+        self.__username = username
         self.__balance = balance
         self.__level = level
         self.__gender = gender
@@ -18,6 +19,10 @@ class User(BaseClass):
     @property
     def name(self) -> str:
         return self.__name
+    
+    @property
+    def username(self) -> str:
+        return self.__username
     
     @property
     def balance(self) -> float:

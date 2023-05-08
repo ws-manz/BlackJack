@@ -48,6 +48,9 @@ class Game(BaseClass):
             return False
         self.__players.append(player)
         return True
+
+    def get_players(self) -> list[Participant]: 
+        return self.__players
         
     def start_game(self) -> bool:
         # Reinicia o jogo

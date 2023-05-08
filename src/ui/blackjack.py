@@ -1,8 +1,8 @@
-from object_value.result import Result
 import pygame
 import sys
 import pygame.time
 
+from object_value.result import Result
 from ui.HandPlayerRect import HandPlayerRect
 
 class Blackjack:

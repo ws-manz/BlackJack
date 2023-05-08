@@ -12,7 +12,7 @@ import random
 
 BOTS = []
 
-with open('bots.txt', 'r') as file:
+with open('files/asserts/bots.txt', 'r') as file:
     for line in file:
         name, gender = line.strip().split(',')
         BOTS.append((name, Gender[gender.strip().upper()]))
@@ -22,20 +22,21 @@ logger = ConsoleLogger()
 def create_player(player_num):
     # Pergunta os dados do jogador (nome, nível e dinheiro)
     name = input(f"Jogador {player_num}: Qual é o seu nome? ")
+    username = input(f"Jogador {player_num}: Qual é o seu usuario? ")
     level = input(f"Jogador {player_num}: Qual é o seu nível? (beginner, intermediate, advanced) ").lower()
     gender = input(f"Jogador {player_num}: Qual é o seu Sexo? (male, female) ").lower()
     balance = float(input(f"Jogador {player_num}: Informe seu saldo inicial: "))
 
     # Cria o usuário e o jogador com os dados informados
-    user = User(f"{name} {Gender[gender.upper()].symbol()}", Level[level.upper()], Gender[gender.upper()], balance)
+    user = User(f"{name} {Gender[gender.upper()].symbol()}", username, Level[level.upper()], Gender[gender.upper()], balance)
     player = Player(user)
 
     return player
 
 def create_bot(num_bots):
     level = random.choice(list(Level))  # Escolhe um nível aleatório para o bot
-    balance = random.randrange(1000.00, 10001.00, 1000.00) # Saldo aleatório entre 1000 e 10000
-    user = User(f"{BOTS[num_bots][0]} {BOTS[num_bots][1].symbol()} 🤖", level, BOTS[num_bots][0][1], round(balance,0))
+    balance = random.randrange(3000.00, 10001.00, 1000.00) # Saldo aleatório entre 1000 e 10000
+    user = User(f"{BOTS[num_bots][0]} {BOTS[num_bots][1].symbol()} 🤖", name.lower() , level, BOTS[num_bots][1], round(balance,0))
     player = Bot(user)
 
     return player

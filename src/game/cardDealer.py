@@ -9,8 +9,6 @@ from player.player import Player
 from player.bot import Bot
 from player.dealer import Dealer
 from utils.utils import Utils
-#from object_value.level import Level
-#from object_value.handChoice import HandChoice
 from utils.base_class import BaseClass
 
 class CardDealer(BaseClass):
