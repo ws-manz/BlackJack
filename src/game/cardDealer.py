@@ -28,17 +28,20 @@ class CardDealer(BaseClass):
             self.__dealer.deal_card(self.__dealer.get_player())
             
     def __deal_additional_cards(self, player:Participant):
-        
-        if player.meets_strip_condition():
-            self.strip(player)
-           
+                   
         current_hand_index = 0
         for my_hand in player.get_hands():   
+
             if(not my_hand.has_cards()):
                 break
+
             player.switch_hand(current_hand_index)     
             current_hand_index =1    
             while True:                                          
+                
+                if player.meets_strip_condition():
+                    self.strip(player)
+
                 if isinstance(player, Player):
                     self.logger.log(f"### {player.get_user().name} your chances of blackjack are {self.calculate_blackjack_probability(player)}% ###")
                     
