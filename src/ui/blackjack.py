@@ -196,26 +196,7 @@ class Blackjack:
         self.draw_dealer()
         self.draw_players()
 
-        for rect in self.hand_dealer_rects:
-            self.draw_card(rect.x+5, rect.y+5, 7, '♣')
-
-            for rect in self.hand_player_rects:
-                rect0 = rect.get_rects()[0]
-                rect1 = rect.get_rects()[1]
-                #pygame.time.set_timer(pygame.USEREVENT, 3000)
-                #self.card_sound.play()
-                
-                self.draw_card(rect0.x+5, rect0.y+5, 7, '♥')
-                self.draw_card(rect0.x+10, rect0.y-5, 10, '♣')
-                self.draw_card(rect0.x+15, rect0.y-15, 10, '♥')
-                self.draw_card(rect0.x+20, rect0.y-25, 10, '♣')
-
-                self.draw_card(rect1.x+5, rect1.y+5, 'K', '♣')
-                self.draw_card(rect1.x+10, rect1.y-5, 10, '♣')
-                self.draw_card(rect1.x+15, rect1.y-15, 10, '♥')
-                self.draw_card(rect1.x+20, rect1.y-25, 10, '♣')
-
-            self.draw_card(575, 135, 'A', '♣')
+        self.deal_cards()
 
         # Atualiza a tela
         pygame.display.flip()
@@ -252,6 +233,26 @@ class Blackjack:
     def deal_cards(self):
         # distribui as cartas e atualiza o estado do jogo
         self.game_state = "dealing"
+        for rect in self.hand_dealer_rects:
+            self.draw_card(rect.x+5, rect.y+5, 7, '♣')
+
+            for rect in self.hand_player_rects:
+                rect0 = rect.get_rects()[0]
+                rect1 = rect.get_rects()[1]
+                #pygame.time.set_timer(pygame.USEREVENT, 3000)
+                #self.card_sound.play()
+                
+                self.draw_card(rect0.x+5, rect0.y+5, 7, '♥')
+                self.draw_card(rect0.x+10, rect0.y-5, 10, '♣')
+                self.draw_card(rect0.x+15, rect0.y-15, 10, '♥')
+                self.draw_card(rect0.x+20, rect0.y-25, 10, '♣')
+
+                self.draw_card(rect1.x+5, rect1.y+5, 'K', '♣')
+                self.draw_card(rect1.x+10, rect1.y-5, 10, '♣')
+                self.draw_card(rect1.x+15, rect1.y-15, 10, '♥')
+                self.draw_card(rect1.x+20, rect1.y-25, 10, '♣')
+
+            self.draw_card(575, 135, 'A', '♣')
 
     def hit_player(self):
         # compra uma carta para o jogador e atualiza o estado do jogo
