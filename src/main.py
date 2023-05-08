@@ -1,32 +1,43 @@
 from game.game import Game
-from player.botPlayer import BotPlayer
-from player.humanPlayer import HumanPlayer
+from player.bot import Bot
+from player.player import Player
 from game.user import User
 from object_value.level import Level
+from object_value.gender import Gender
 from utils.console_logger import ConsoleLogger
 
 import random
 
-BOT_NAMES = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Julia', 'Karen', 'Lucas', 'Maria', 'Nathan', 'Oliver', 'Pamela', 'Quentin', 'Rachel', 'Simon', 'Tina', 'Ursula', 'Victoria', 'Wendy', 'Xavier', 'Yvonne', 'Zara']
+#BOTS = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Julia', 'Karen', 'Lucas', 'Maria', 'Nathan', 'Oliver', 'Pamela', 'Quentin', 'Rachel', 'Simon', 'Tina', 'Ursula', 'Victoria', 'Wendy', 'Xavier', 'Yvonne', 'Zara']
+
+BOTS = []
+
+with open('files/asserts/bots.txt', 'r') as file:
+    for line in file:
+        name, gender = line.strip().split(',')
+        BOTS.append((name, Gender[gender.strip().upper()]))
+        
 logger = ConsoleLogger()
 
 def create_player(player_num):
     # Pergunta os dados do jogador (nome, nível e dinheiro)
     name = input(f"Jogador {player_num}: Qual é o seu nome? ")
+    username = input(f"Jogador {player_num}: Qual é o seu usuario? ")
     level = input(f"Jogador {player_num}: Qual é o seu nível? (beginner, intermediate, advanced) ").lower()
-    money = float(input(f"Jogador {player_num}: Informe seu saldo inicial: "))
+    gender = input(f"Jogador {player_num}: Qual é o seu Sexo? (male, female) ").lower()
+    balance = float(input(f"Jogador {player_num}: Informe seu saldo inicial: "))
 
     # Cria o usuário e o jogador com os dados informados
-    user = User(name, Level[level.upper()], money)
-    player = HumanPlayer(user)
+    user = User(f"{name} {Gender[gender.upper()].symbol()}", username, Level[level.upper()], Gender[gender.upper()], balance)
+    player = Player(user)
 
     return player
 
 def create_bot(num_bots):
     level = random.choice(list(Level))  # Escolhe um nível aleatório para o bot
-    balance = random.uniform(1000.00, 10000.00)  # Saldo aleatório entre 1000 e 10000
-    user = User(BOT_NAMES[num_bots], level, round(balance,0))
-    player = BotPlayer(user)
+    balance = random.randrange(3000.00, 10001.00, 1000.00) # Saldo aleatório entre 1000 e 10000
+    user = User(f"{BOTS[num_bots][0]} {BOTS[num_bots][1].symbol()} 🤖", name.lower() , level, BOTS[num_bots][1], round(balance,0))
+    player = Bot(user)
 
     return player
 
@@ -36,12 +47,11 @@ def main():
 
     # Pergunta ao usuário quantos jogadores o jogo terá
     num_players = int(input("Quantos jogadores o jogo terá? "))
-    max_players = 8 # Define o máximo de jogadores permitidos
     
     # Verifica se a quantidade de jogadores informada é válida
-    if num_players <= 0 or num_players > max_players:
-        print("Quantidade de jogadores inválida. O jogo terá 2 jogadores.")
-        num_players = 2
+    if num_players <= 0 or num_players > game.max_players:
+        print("Quantidade de jogadores inválida. O jogo terá {game.max_players} jogadores.")
+        num_players = game.max_players
 
     # Adiciona o jogador humano
     player_num = 1
@@ -67,11 +77,16 @@ def main():
 
     # Inicia o jogo
     while True:
-        game.start_game()
+        retorno = game.start_game()
         logger.print_logs()
-        answer = input("Deseja jogar novamente? (S/N) ")
-        if answer.upper() != "S":
+        
+        if(retorno):
+            answer = input("Deseja jogar novamente? (S/N) ")
+            if answer.upper() != "S":
+                break
+        else:
             break
+            
 
     print("Fim de jogo.")
 

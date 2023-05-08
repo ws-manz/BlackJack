@@ -10,10 +10,15 @@ from src.game.user import User
 class TestUser(unittest.TestCase):
 
     def test_create_user(self):
-        user = User("Jane")
+        user = User("Jane","jane")
         self.assertEqual(user.name, "Jane")
         #self.assertEqual(user.wallet, 100)
 
+    def test_username(self):
+        user = User("Jane","jane")
+        self.assertEqual(user.username, "jane")
+        #self.assertEqual(user.wallet, 100)
+        
     '''def test_add_funds(self):
         user = User("Jane")
         user.add_funds(50)

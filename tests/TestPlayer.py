@@ -5,7 +5,7 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.player.humanPlayer import HumanPlayer
+from src.player.player import Player
 from src.game.user import User
 from src.card.suit import Suit
 from src.card.card import Card
@@ -15,7 +15,7 @@ class TestPlayer(unittest.TestCase):
 
     def setUp(self):
         user = User('Player', Level.BEGINNER, 1000.00)
-        self.__player = HumanPlayer(user)
+        self.__player = Player(user)
         
     def test_create_player(self):
         self.assertEqual(self.__player.get_user().name, "Player")
