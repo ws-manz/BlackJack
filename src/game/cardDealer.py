@@ -32,7 +32,7 @@ class CardDealer(BaseClass):
         current_hand_index = 0
         for my_hand in player.get_hands():   
 
-            if(not my_hand.has_cards()):
+            if(not my_hand):
                 break
 
             player.switch_hand(current_hand_index)     
@@ -49,7 +49,7 @@ class CardDealer(BaseClass):
                     break
                 
                 if isinstance(player, Bot):
-                    if player.hand.get_value() >= 13 and player.hand.get_value() <= 14 and (self.__dealer.get_player().hand.get_cards()[0].value == 1):
+                    if player.hand.get_value() >= 13 and player.hand.get_value() <= 14 and (self.__dealer.get_player().hand[0].value == 1):
                         player.wants_to_surrender()
                         break
                 
@@ -94,7 +94,7 @@ class CardDealer(BaseClass):
     def show_cards(self):
         # Mostra a primeira carta de cada jogador e do dealer
         self.logger.log("### Dealer ###")
-        self.logger.log(f"Dealer's card: {[card.name + ' ' + card.suit.symbol for card in self.__dealer.get_player().hand.get_cards()]}")
+        self.logger.log(f"Dealer's card: {[card.name + ' ' + card.suit.symbol for card in self.__dealer.get_player().hand]}")
 
         for player in self.__players:
             self.logger.log(f"### {player.get_user().name} ###")
