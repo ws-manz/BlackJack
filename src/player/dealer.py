@@ -1,5 +1,7 @@
 import os
 import sys
+from object_value.gender import Gender
+from object_value.result import Result
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -11,7 +13,8 @@ from utils.base_class import BaseClass
 
 class Dealer(BaseClass):
     def __init__(self, deck = []):
-        self.__player = Bot(User("Dealer 🎰", Level.ADVANCED, 100000))
+        player = User("Dealer 🎰", "dealer" , Level.ADVANCED, Gender.MALE,  1000000.00)
+        self.__player = Bot(player)
         self.__deck = deck
         
     def get_player(self):
