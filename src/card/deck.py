@@ -1,3 +1,4 @@
+from typing import List, Tuple
 import os
 import sys
 
@@ -13,36 +14,38 @@ from utils.base_class import BaseClass
 import random
 
 class Deck(BaseClass):
+        
     def __init__(self):
         self.__cards = self.__create_deck()
-        self.__card_iterator = iter(self.__cards)
-
+        self.__card_iterator = iter(self.__cards)        
     def __create_suits(self):
-        suits = [("spade", "♠"), ("heart", "♥"), ("diamond", "♦"), ("clubs", "♣")]
-        return (Suit(name, symbol) for name, symbol in suits)
+        suits: Tuple[Tuple[str, str]] = (("spade", "♠"), ("heart", "♥"), ("diamond", "♦"), ("clubs", "♣"))
+        return tuple(Suit(name, symbol) for name, symbol in suits)
 
     def __create_deck(self):
-        cards = []
+        deck: List[Card] = []
         for suit in self.__create_suits():
-            cards.append(Card("Ace", 1, suit))
+            deck.append(Card("Ace", 1, suit))
             for i in range(2, 11):
-                cards.append(Card(str(i), i, suit))
-            cards.append(Card("Jack", 10, suit))
-            cards.append(Card("Queen", 10, suit))
-            cards.append(Card("King", 10, suit))
-
-        random.shuffle(cards)
-        return cards
+                deck.append(Card(str(i), i, suit))
+            deck.append(Card("Jack", 10, suit))
+            deck.append(Card("Queen", 10, suit))
+            deck.append(Card("King", 10, suit))
+        
+        return deck
     
     def shuffle_deck(self): 
-        return random.shuffle(self.__cards)
+        self.__cards = random.sample(self.__cards, len(self.__cards))
+        self.__card_iterator = iter(self.__cards)
 
     def get_next_card(self):
+        if len(self.__cards) == 0:
+            raise ValueError("No cards available in the deck.")
         return next(self.__card_iterator)
 
     def reset_deck(self):
         self.__cards = self.__create_deck()
         self.__card_iterator = iter(self.__cards)
 
-    def get_cards(self):
+    def get_cards(self)-> List[Card]:
         return self.__cards

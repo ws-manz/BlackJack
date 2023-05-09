@@ -50,6 +50,6 @@ class GameLogic(BaseClass):
             - Se o valor total da mão do dealer ultrapassar 21 pontos ou o valor total da mão do jogador for maior do que o do dealer, o jogador vence.
             - Se o jogador tiver exatamente duas cartas na mão e o valor total for 21, então ele fez um blackjack e vence, a menos que o dealer também tenha feito um blackjack.
             """
-            is_blackjack = hand.is_blackjack() and len(hand.get_cards()) == 2
+            is_blackjack = hand.is_blackjack() and len(hand) == 2
             return player_value <= 21 and (dealer_value > 21 or player_value > dealer_value or is_blackjack and dealer_value != 21)
                 

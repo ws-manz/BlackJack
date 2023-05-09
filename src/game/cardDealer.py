@@ -32,15 +32,14 @@ class CardDealer(BaseClass):
         current_hand_index = 0
         for my_hand in player.get_hands():   
 
-            if(not my_hand.has_cards()):
+            if(not my_hand):
                 break
 
             player.switch_hand(current_hand_index)     
             current_hand_index =1    
             while True:                                          
-                
-                if player.meets_strip_condition():
-                    self.strip(player)
+                                
+                self.strip(player)
 
                 if isinstance(player, Player):
                     self.logger.log(f"### {player.get_user().name} your chances of blackjack are {self.calculate_blackjack_probability(player)}% ###")
@@ -49,7 +48,7 @@ class CardDealer(BaseClass):
                     break
                 
                 if isinstance(player, Bot):
-                    if player.hand.get_value() >= 13 and player.hand.get_value() <= 14 and (self.__dealer.get_player().hand.get_cards()[0].value == 1):
+                    if player.hand.get_value() >= 13 and player.hand.get_value() <= 14 and (self.__dealer.get_player().hand[0].value == 1):
                         player.wants_to_surrender()
                         break
                 
@@ -62,19 +61,21 @@ class CardDealer(BaseClass):
         # Observação: Se jogador não ultrapassou 21 pontos ou não decidiu parar de comprar cartas, continue distribuindo mais cartas
         current_hand_index = 0
     
-    def strip(self, player):
-        #self.logger.log("Player's first card is a 10!")
+    def strip(self, player : Participant):
+        
+        if not player.meets_strip_condition():
+            return 
+        
         if isinstance(player, Player):
             response = input("Do you want to strip? (Sim/Não): ")
             if response.lower() in ["sim", "s"]:
-                player.switch_hand(1)
-                self.__dealer.deal_card(player)
-                player.switch_hand(0)
+                self.__strip_hand(player)
         elif(isinstance(player, Bot)):
-            player.switch_hand(1)
-            self.__dealer.deal_card(player)
-            player.switch_hand(0)
-                                 
+            self.__strip_hand(player)
+    
+    def __strip_hand(self, player: Participant):
+        player.get_hands()[1].add_card(player.get_hands()[0].pop_card(1))
+                                     
     def deal_cards(self):
         self.distribute_cards()
         
@@ -94,7 +95,7 @@ class CardDealer(BaseClass):
     def show_cards(self):
         # Mostra a primeira carta de cada jogador e do dealer
         self.logger.log("### Dealer ###")
-        self.logger.log(f"Dealer's card: {[card.name + ' ' + card.suit.symbol for card in self.__dealer.get_player().hand.get_cards()]}")
+        self.logger.log(f"Dealer's card: {[card.name + ' ' + card.suit.symbol for card in self.__dealer.get_player().hand]}")
 
         for player in self.__players:
             self.logger.log(f"### {player.get_user().name} ###")

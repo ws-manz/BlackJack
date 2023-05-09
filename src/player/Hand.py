@@ -6,6 +6,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from card.card import Card
 
 class Hand:
+    
+    BLACKJACK = 21
+    
     def __init__(self, cards: list[Card] = None):
         
         if cards is None:
@@ -44,27 +47,33 @@ class Hand:
     def get_cards(self) -> list[Card]:
         return self.__cards
     
-    def has_cards(self) -> list[Card]:
-        return len(self.__cards) > 0
-
     def get_value(self) -> int:
         hand_value = 0
         aces_count = 0
-        for card in self.__cards:
+        for card in self:
             if card.name != 'Ace':
                 hand_value += card.value
             else:
                 aces_count += 1
 
         for i in range(aces_count):
-            if hand_value + 11 <= 21:
+            if hand_value + 11 <= self.BLACKJACK:
                 hand_value += 11
             else:
                 hand_value += 1
         return hand_value
 
     def is_bust(self) -> bool:
-        return self.get_value() > 21
+        return self.get_value() > self.BLACKJACK
 
     def is_blackjack(self) -> bool:
-        return self.get_value()== 21
+        return self.get_value() == self.BLACKJACK
+    
+    def __getitem__(self, index: int) -> Card:
+        return self.__cards[index]
+
+    def __len__(self) -> int:
+        return len(self.__cards)
+    
+    def __bool__(self) -> bool:
+        return len(self) > 0

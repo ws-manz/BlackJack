@@ -55,7 +55,7 @@ class Round(BaseClass):
         self.__game_view.display_dealer_cards()
 
         # Atualiza o saldo dos jogadores
-        self.__player_manager.update_balances(self.__players, winners)
+        self.__player_manager.update_balances(self.__players,self.__dealer, winners)
         
         
                                             
