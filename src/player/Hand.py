@@ -44,9 +44,6 @@ class Hand:
     def get_cards(self) -> list[Card]:
         return self.__cards
     
-    def has_cards(self) -> list[Card]:
-        return len(self.__cards) > 0
-
     def get_value(self) -> int:
         hand_value = 0
         aces_count = 0
@@ -68,3 +65,12 @@ class Hand:
 
     def is_blackjack(self) -> bool:
         return self.get_value()== 21
+    
+    def __getitem__(self, index: int) -> Card:
+        return self.__cards[index]
+
+    def __len__(self) -> int:
+        return len(self.__cards)
+    
+    def __bool__(self) -> bool:
+        return len(self) > 0

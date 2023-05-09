@@ -13,5 +13,3 @@ class Suit:
 
     def __str__(self) -> str:
         return self.__name
-
-'''♠ ♥ ♦ ♣'''
