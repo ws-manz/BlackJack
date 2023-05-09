@@ -23,7 +23,7 @@ class TestPlayer(unittest.TestCase):
 
     def test_add_card(self):
         self.__player.hand.add_card(Card("Ace", 1, Suit("spade", "♠")))
-        self.assertEqual(len(self.__player.hand.get_cards()), 1)
+        self.assertEqual(len(self.__player.hand), 1)
         
     def test_can_afford_bet(self):
         self.assertFalse(self.__player.get_user().can_afford_bet(10000.00))

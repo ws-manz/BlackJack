@@ -60,8 +60,8 @@ class Participant(BaseClass, ABC):
         self.__hands[1].clear_cards()
         
     def get_hand_choice(self) -> HandChoice:
-        has_cards_hand1 = bool(self.__hands[0].get_cards())
-        has_cards_hand2 = bool(self.__hands[1].get_cards())
+        has_cards_hand1 = self.__hands[0]
+        has_cards_hand2 = self.__hands[1]
         
         if has_cards_hand1 and has_cards_hand2:
             return HandChoice.BOTH
@@ -73,8 +73,8 @@ class Participant(BaseClass, ABC):
             return HandChoice.NONE
         
     def meets_strip_condition(self) -> bool:
-        if(self.get_user().level in [Level.INTERMEDIATE, Level.ADVANCED] and  len(self.hand.get_cards()) == 2 and 
+        if(self.get_user().level in [Level.INTERMEDIATE, Level.ADVANCED] and  len(self.hand) == 2 and 
                 self.get_hand_choice() == HandChoice.HAND1):
-            return  self.hand.get_cards()[0].value == self.hand.get_cards()[1].value
+            return  self.hand[0].value == self.hand[1].value
         else:
             return False
